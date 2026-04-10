@@ -1,7 +1,11 @@
 {
-  "compilerOptions": {
+  "compilerOptions": {    
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/components/*": ["./app/components/*"],
+      "@/supabase/*": ["./app/supabase/*"],
+      "@/css": ["./app/globals.css"],
+      "@/function/*":["./app/function/*"]
     }
   }
 }
