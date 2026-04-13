@@ -24,7 +24,7 @@ export default function Foodcontain({ data, deleteorder }) {
     async function decreasequantity(id,i) {
         setallquantity(prev => prev.map(
             item => item.id === id ? {
-                ...item, quantity: item.quantity - 1
+                ...item, quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity
             } : item
         ))
         settotalprice(prev => prev - allquantity[i].harga)

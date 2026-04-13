@@ -25,9 +25,9 @@ export default function Foodpreview({ index,nama, gambar, harga, id, quantity, d
                 <div className="flex justify-center items-center gap-2" >
                     <h1 className="text-orange-600 font-extrabold" > {convertToMoney(harga * quantity )} </h1>
                     <div className="flex gap-3 bg-white rounded-4xl items-center justify-center" >
-                        <button onClick={() => increasequantity(id,index) } className="p-2 text-2xl cursor-pointer" > <Plus /></button>
+                        <button  onClick={() => increasequantity(id,index) } className="p-2 text-2xl cursor-pointer" > <Plus /></button>
                         <h1> {quantity} </h1>
-                        <button onClick={ () => decreasequantity(id,index)} className="p-2 text-2xl cursor-pointer " > <DashLg /></button>
+                        <button disabled={quantity === 1} onClick={ () => decreasequantity(id,index)} className="p-2 text-2xl cursor-pointer " > <DashLg /></button>
                     </div>
                 </div>
             </div>
