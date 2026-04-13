@@ -4,6 +4,9 @@ import { Search } from "react-bootstrap-icons";
 import Link from "next/link";
 import { headers } from "next/headers";
 import Linknavigate from "../components/home/linkheader";
+import { createClient } from "../supabase/server";
+import supabase from "../supabase/supabase";
+import { redirect } from "next/navigation";
 
 const jakarta = Plus_Jakarta_Sans({})
 
@@ -15,10 +18,20 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const header = await headers()
   console.log( header.get("x-pathname"))
+  const supabaseserver =  await createClient()
+  const {data} = await supabaseserver.auth.getUser()
+  const {data:session} = await supabaseserver.auth.getSession()
+  if(!session.session){
+    redirect("/table")
+  }
+  const userid = data?.user.id
+  const {data:tabledata}  = await supabase.from("meja").select("*").eq("uuid",userid).single()
+  console.log(tabledata)
   return (    
         <main className="flex flex-col items-center w-full h-auto pb-18">
           <nav className="w-full px-3 h-15 flex items-center justify-between  " >
-            <h1 className="text-2xl font-bold text-orange-700" > Meja 01 </h1>
+            <h1 className="text-2xl font-bold text-orange-700" > Meja {tabledata.nomer_meja || 1} 
+              </h1>
           </nav>
           <div className="w-full mt-4 px-4 py-1 " >
             <h5 className="text-md font-semibold text-orange-900" > Selamat datang di devano_Food </h5>
