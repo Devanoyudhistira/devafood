@@ -1,10 +1,33 @@
 import Image from "next/image";
 import { Search } from "react-bootstrap-icons";
 import Foodcard from "./components/home/foodcard";
+import Footer from "./components/Footer";
+import supabase from "./supabase/supabase";
+import convertToMoney from "./function/convert";
+import truncate from "./function/truncat";
 
-export default function Home() {
+/**
+ * @typedef {Object} Food
+ * @property {number} id
+ * @property {string} name
+ * @property {string} status
+ * @property {number} harga
+ * @property {string} description
+ * @property {string} jenis
+ * @property {string} gambar
+ * @property {string} created_at
+ */
+
+
+export default async function Home() {
+  const { data } = await supabase.from("food").select("*")
+  /** @type {Food[]} */
+  const food = data ?? []
+  function addfood(food){
+    console.log(food)
+  }
   return (
-    <main className="flex flex-col items-center w-full h-auto ">
+    <main className="flex flex-col items-center w-full h-auto pb-18">
       <nav className="w-full px-3 h-15 flex items-center justify-between  " >
         <h1 className="text-2xl font-bold text-orange-700" > Meja 01 </h1>
       </nav>
@@ -27,11 +50,12 @@ export default function Home() {
       </div>
       <h1 className="text-3xl font-extrabold text-orange-800 self-start mt-4 ml-4 capitalize" > For you </h1>
       <div className="w-full px-6 mt-4 grid grid-cols-2 gap-y-6 gap-x-2 pb-10" >
-        <Foodcard/>      
-        <Foodcard/>      
-        <Foodcard/>      
-        <Foodcard/>      
+        {food.map(
+          e => <Foodcard nama={e.name} id={e.id} image={e.gambar.trimEnd()} harga={e.harga} desc={e.description} key={e.id}  />
+        )}
+
       </div>
+      <Footer status={"main"} />
     </main>
   );
 }

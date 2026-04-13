@@ -1,0 +1,52 @@
+"use client"
+import { useState } from "react"
+import Foodpreview from "./foodpreview"
+import convertToMoney from "@/app/function/convert";
+import supabase from "@/app/supabase/supabase";
+
+
+export default function Foodcontain({ data, deleteorder }) {
+    const [allquantity, setallquantity] = useState(data.map((e, i) => ({ id: e.id, quantity: e.quantity,harga:e.food.harga })))
+    const [totalprice, settotalprice] = useState(data.reduce((total, item, i) => { return (total + (item.food.harga * item.quantity)); }, 0))
+
+    async function increasequantity(id, i) {
+        setallquantity(prev => prev.map(
+            item => item.id === id ? {
+                ...item, quantity: item.quantity + 1
+            } : item
+        ))
+        settotalprice(prev => prev + allquantity[i].harga)
+        const { error } = await supabase.rpc("quantity_increase", {
+            order_id: id,
+        })
+    }
+
+    async function decreasequantity(id,i) {
+        setallquantity(prev => prev.map(
+            item => item.id === id ? {
+                ...item, quantity: item.quantity - 1
+            } : item
+        ))
+        settotalprice(prev => prev - allquantity[i].harga)
+        const { error } = await supabase.rpc("quantity_decrease", {
+            order_id: id,
+        })
+    }
+
+    console.log(allquantity)
+
+    console.log(convertToMoney(totalprice))
+    return (<div className="flex flex-col gap-1 items-center">
+        <div className="w-full h-98 overflow-x-hidden overflow-y-auto  px-1 mt-7 py-3 flex flex-col gap-4" >
+            {data.map((e, i) =>
+                <Foodpreview index={i} increasequantity={increasequantity} decreasequantity={decreasequantity} deletefunc={deleteorder} key={e.id} id={e.id} gambar={e.food.gambar} nama={e.food.name} quantity={allquantity[i].quantity} harga={e.food.harga} />
+            )}
+        </div>
+
+        <div className={`w-[90%] flex justify-between items-center px-3 h-24 bg-orange-200 rounded-2xl`} >
+            <h1 className="text-2xl font-semibold  capitalize" > total </h1>
+            <h2 className="text-2xl text-orange-600 font-extrabold " > {convertToMoney(totalprice)} </h2>
+        </div>
+
+    </div>)
+}
