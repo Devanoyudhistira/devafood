@@ -1,4 +1,8 @@
+
+
 import { addorder } from "@/app/actions/crudorder"
+import Formaction from "@/app/components/detail/form"
+import Orderadd from "@/app/components/flashmessage/orderadd"
 import convertToMoney from "@/app/function/convert"
 import supabase from "@/app/supabase/supabase"
 import Image from "next/image"
@@ -6,26 +10,13 @@ import Link from "next/link"
 import { Cart } from "react-bootstrap-icons"
 import { ArrowLeft } from "react-bootstrap-icons"
 
-/**
- * @typedef {Object} Food
- * @property {number} id
- * @property {string} name
- * @property {string} status
- * @property {number} harga
- * @property {string} description
- * @property {string} jenis
- * @property {string} gambar
- * @property {string} created_at
- */
-
 export default async function Page({ params }) {
     const { slug } = await params
     const { data } = await supabase.from("food").select("*").eq("id", slug).single()
     /** @type {Food{}} */
-    const food = data
-    console.log(data)
+    const food = data        
     return (
-        <main className="pb-15" >
+        <main className="pb-15" >            
             <nav className="w-screen h-15 flex px-4 items-center gap-3 " >
                 <Link href={"/"} >
                     <ArrowLeft size={25} />
@@ -41,10 +32,10 @@ export default async function Page({ params }) {
                 <aside className="w-full h-43 bg-orange-200 rounded-3xl px-3" >
                     {food.description}
                 </aside>
-                <form action={addorder} >
+                <Formaction action={addorder} >
                     <input type="text" value={food.id} name="id" id="id" hidden />
                     <button type="submit" className="w-full text-white text-3xl font-bold h-15 flex items-center gap-2 justify-center rounded-full bg-linear-to-tl from-orange-500 to-yellow-400" > add to order <Cart size={25} /> </button>
-                </form>
+                </Formaction>
             </div>
 
         </main>

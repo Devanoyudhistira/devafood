@@ -9,8 +9,7 @@ import supabase from "../supabase/supabase";
 import Login from "../actions/tableauth";
 
 export default async function Page() {
-    const { data } = await supabase.from("meja").select("*").order("nomer_meja", { ascending: true })
-    console.log(data)
+    const { data } = await supabase.from("meja").select("*").order("nomer_meja", { ascending: true })    
     return (
         <main className="px-1 pb-10 flex flex-col items-center" >
             <nav className="w-screen h-12 flex items-center text-md text-orange-800 font-semibold" >

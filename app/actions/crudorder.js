@@ -1,24 +1,36 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import supabase from "../supabase/supabase";
+import { NextResponse } from "next/server";
+import { createClient } from "../supabase/server";
 
 export async function deleteorder(Formdata) {
   const id = Formdata.get("id");
-  const { error } = await supabase.from("order").delete().eq("id", id);
-  console.log(error);
+  const { error } = await supabase.from("order").delete().eq("id", id);  
   revalidatePath("/preview");
 }
-export async function addorder(Formdata) {
+export async function addorder(prev,Formdata) {
   const id = Formdata.get("id");
+  const supabaseserver = await createClient();
+  const { data: user } = await supabaseserver.auth.getUser();
+  const { data: table } = await supabase
+    .from("meja")
+    .select("nomer_meja")
+    .eq("uuid", user.user.id)
+    .single();
 
   const { error } = await supabase
     .from("order")
     .upsert({
-      table: 1,
+      table: table.nomer_meja,
       food: id,
     })
     .select("*")
     .single();
 
-  console.log(error);  
+  if (error) {
+    return { code: 402, message: "gagal silahkan coba lagi" };
+  }
+  revalidatePath("/preview");
+  return { code: 200, message: "berhasil di tambah ke order" };
 }

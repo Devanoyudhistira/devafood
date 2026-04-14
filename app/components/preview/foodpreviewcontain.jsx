@@ -33,9 +33,6 @@ export default function Foodcontain({ data, deleteorder }) {
         })
     }
 
-    console.log(allquantity)
-
-    console.log(convertToMoney(totalprice))
     return (<div className="flex flex-col gap-1 items-center">
         <div className="w-full h-98 overflow-x-hidden overflow-y-auto  px-1 mt-7 py-3 flex flex-col gap-4" >
             {data.map((e, i) =>
@@ -43,7 +40,7 @@ export default function Foodcontain({ data, deleteorder }) {
             )}
         </div>
 
-        <div className={`w-[90%] flex justify-between items-center px-3 h-24 bg-orange-200 rounded-2xl`} >
+        <div className={`w-[85%] flex justify-between items-center px-3 h-24 bg-orange-200 rounded-2xl`} >
             <h1 className="text-2xl font-semibold  capitalize" > total </h1>
             <h2 className="text-2xl text-orange-600 font-extrabold " > {convertToMoney(totalprice)} </h2>
         </div>
