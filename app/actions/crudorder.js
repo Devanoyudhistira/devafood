@@ -4,12 +4,19 @@ import supabase from "../supabase/supabase";
 import { NextResponse } from "next/server";
 import { createClient } from "../supabase/server";
 
-export async function deleteorder(Formdata) {
+export async function deleteorder(prev,Formdata) {
   const id = Formdata.get("id");
-  const { error } = await supabase.from("order").delete().eq("id", id);  
-  revalidatePath("/preview");
+  const { error } = await supabase.from("order").delete().eq("id", id);
+  if (error) {
+    return { code: 402, message: "gagal silahkan coba lagi" };
+  }
+  revalidatePath("/detail");
+  return { code: 200, message: "order berhasil dihapus" };
 }
-export async function addorder(prev,Formdata) {
+
+
+
+export async function addorder(prev, Formdata) {
   const id = Formdata.get("id");
   const supabaseserver = await createClient();
   const { data: user } = await supabaseserver.auth.getUser();
@@ -31,6 +38,6 @@ export async function addorder(prev,Formdata) {
   if (error) {
     return { code: 402, message: "gagal silahkan coba lagi" };
   }
-  revalidatePath("/preview");
+  revalidatePath("/detail");
   return { code: 200, message: "berhasil di tambah ke order" };
 }

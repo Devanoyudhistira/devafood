@@ -6,23 +6,16 @@ import { useActionState, useEffect, useState } from "react"
 export default function Formaction({ children, action }) {
     const [state, addorder, pending] = useActionState(action, null)
     const [Result, setResult] = useState(state?.code === 200)
+    console.log(state)
 
-    useEffect(() => {
-        if (state?.code === 200) {
-            const timer = setTimeout(() => {
-                setResult(false)
-            }, 1000)
-
-            return () => clearTimeout(timer) 
-        }
-    })
+  
 
 
     return (
         <>
 
-            {Result && <Orderadd show={Result} />}
-            <form action={addorder}>
+            <Orderadd pending={pending} message={state?.message} show={state?.code === 200} />
+            <form action={addorder} >
                 {children}
             </form>
         </>

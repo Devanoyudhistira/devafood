@@ -9,7 +9,7 @@ import { Plus } from "react-bootstrap-icons"
 
 export default function Foodcard({ nama, harga, image, desc, id, addorder }) {
     return (<div className={`w-40 h-58 bg-white flex flex-col rounded-2xl overflow-hidden shadow-xl shadow-gray-700/30 relative`} >
-        <Image width={300} height={300} src={`https://bmqqribeuxnppfcxittg.supabase.co/storage/v1/object/public/devafood/${image}`} className="w-full bg-black h-30 flex-none object-center object-cover" alt={nama} />
+        <Image width={100} height={100} src={`https://bmqqribeuxnppfcxittg.supabase.co/storage/v1/object/public/devafood/${image}`} className="w-full bg-black h-30 flex-none object-center object-cover" alt={nama} />
         <div className="w-full h-full flex justify-between gap-1 flex-col px-1.5" >
             <form action={addorder} className="absolute z-100 right-4 top-2" >
                 <input type="text" name="id" id="id" hidden value={id} />
