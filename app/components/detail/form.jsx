@@ -14,7 +14,7 @@ export default function Formaction({ children, action }) {
     return (
         <>
 
-            <Orderadd pending={pending} message={state?.message} show={state?.code === 200} />
+            <Orderadd error={state?.code !== 200} pending={pending} message={state?.message} show={state?.code === 200} />
             <form action={addorder} >
                 {children}
             </form>

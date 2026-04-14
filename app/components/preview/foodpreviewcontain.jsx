@@ -37,7 +37,7 @@ export default function Foodcontain({ data, deleteorder }) {
     }
 
     return (<div className="flex flex-col gap-1 items-center">
-        <Orderadd message={state?.message} pending={pending} show={state?.code === 200} />
+        <Orderadd error={state?.code !== 200} message={state?.message} pending={pending} show={state?.code === 200} />
         <div className="w-full h-98 overflow-x-hidden overflow-y-auto  px-1 mt-7 py-3 flex flex-col gap-4" >
             {data.map((e, i) =>
                 <Foodpreview index={i} increasequantity={increasequantity} decreasequantity={decreasequantity} deletefunc={deleteaction} key={e.id} id={e.id} gambar={e.food.gambar} nama={e.food.name} quantity={allquantity[i].quantity} harga={e.food.harga} />
