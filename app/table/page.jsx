@@ -10,6 +10,7 @@ import Login from "../actions/tableauth";
 
 export default async function Page() {
     const { data } = await supabase.from("meja").select("*").order("nomer_meja", { ascending: true })    
+    console.log("ini percobaan")
     console.log(data)
     return (
         <main className="px-1 pb-10 flex flex-col items-center" >
