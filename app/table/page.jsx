@@ -10,12 +10,6 @@ import Login from "../actions/tableauth";
 
 export default async function Page() {
     const { data } = await supabase.from("meja").select("*").order("nomer_meja", { ascending: true })
-    console.log("ini percobaan")
-    console.log({thedata:data,message:"Test"})
-    console.log("RAW STATUS:", data[0].status)
-    console.log("STRINGIFIED:", JSON.stringify(data[0].status))
-    console.log("LENGTH:", data[0].status.length)
-    console.log("EQUAL:", data[0].status === "kosong")
     return (
         <main className="px-1 pb-10 flex flex-col items-center" >
             <nav className="w-screen h-12 flex items-center text-md text-orange-800 font-semibold" >
@@ -45,7 +39,7 @@ export default async function Page() {
                 <h3 className="text-md font-medium text-orange-800" > Tekan meja untuk memilih tempat ;) </h3>
                 <div className="grid grid-cols-2 mt-3 py-4 place-items-center self-center w-[95%] bg-white rounded-2xl gap-3 " >
                     {data.map(e =>
-                        <Tableinput email={e.email_meja} password={"password"} loginact={Login} key={e.id} nomor={e.nomer_meja} kursi={e.jumlah_kursi} text={e.status} color={e.status === "kosong" ? "bg-green-300" : "bg-orange-200"} textcolor={e.status === "kosong" ? "text-green-900" : "text-orange-500"} />
+                        <Tableinput email={e.email_meja} password={"password"} loginact={Login} key={e.id} nomor={e.nomer_meja} kursi={e.jumlah_kursi} text={e.status.trimEnd() } color={e.status.trimEnd() === "kosong" ? "bg-green-300" : "bg-orange-200"} textcolor={e.status.trimEnd() === "kosong" ? "text-green-900" : "text-orange-500"} />
                     )}
                 </div>
             </div>
