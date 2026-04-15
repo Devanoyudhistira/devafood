@@ -14,8 +14,8 @@ export default async function Page() {
     console.log({thedata:data,message:"Test"})
     console.log("RAW STATUS:", data[0].status)
     console.log("STRINGIFIED:", JSON.stringify(data[0].status))
-    console.log("LENGTH:", data[0].length)
-    console.log("EQUAL:", data[0] === "kosong")
+    console.log("LENGTH:", data[0].status.length)
+    console.log("EQUAL:", data[0].status === "kosong")
     return (
         <main className="px-1 pb-10 flex flex-col items-center" >
             <nav className="w-screen h-12 flex items-center text-md text-orange-800 font-semibold" >
