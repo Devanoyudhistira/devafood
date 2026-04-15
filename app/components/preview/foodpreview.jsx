@@ -1,14 +1,13 @@
 "use client"
 import convertToMoney from "@/app/function/convert";
 import Image from "next/image";
-import { useState } from "react";
-import { Trash2 } from "react-bootstrap-icons";
 import { Trash } from "react-bootstrap-icons";
 import { DashLg } from "react-bootstrap-icons";
 import { Plus } from "react-bootstrap-icons";
+import * as motion from "motion/react-client"
 
 export default function Foodpreview({ index,nama, gambar, harga, id, quantity, deletefunc,increasequantity,decreasequantity }) {
-        
+    
 
     return (
         <div className="w-full h-30 px-1 gap-1  rounded-xl flex justify-between items-center" >
@@ -24,10 +23,10 @@ export default function Foodpreview({ index,nama, gambar, harga, id, quantity, d
                 <p className="text-xs font-light text-orange-800" > Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, quae </p>
                 <div className="flex justify-center items-center gap-2" >
                     <h1 className="text-orange-600 font-extrabold" > {convertToMoney(harga * quantity )} </h1>
-                    <div className="flex gap-4 bg-white rounded-4xl items-center justify-center" >
-                        <button  onClick={() => increasequantity(id,index) } className="p-2 z-1000 text-2xl cursor-pointer" > <Plus /></button>
+                    <div className="flex gap-4 bg-white overflow-hidden rounded-xl items-center justify-center" >
+                        <motion.button whileTap={{ scale:0.9 }} onClick={() => increasequantity(id,index) } className="p-2 z-1000 text-2xl cursor-pointer  " > <Plus /></motion.button>
                         <h1> {quantity} </h1>
-                        <button disabled={quantity === 1} onClick={ () => decreasequantity(id,index)} className="p-2 z-1000 text-2xl cursor-pointer " > <DashLg /></button>
+                        <motion.button whileTap={{ scale:0.9 }} disabled={quantity === 1} onClick={ () => decreasequantity(id,index)} className="p-2 z-1000 text-2xl cursor-pointer " > <DashLg /></motion.button>
                     </div>
                 </div>
             </div>

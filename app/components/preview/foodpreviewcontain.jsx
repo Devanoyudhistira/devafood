@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Foodpreview from "./foodpreview"
 import convertToMoney from "@/app/function/convert";
 import supabase from "@/app/supabase/supabase";
@@ -8,9 +8,11 @@ import Orderadd from "../flashmessage/orderadd";
 
 
 export default function Foodcontain({ data, deleteorder }) {
-    const [allquantity, setallquantity] = useState(data.map((e, i) => ({ id: e.id, quantity: e.quantity,harga:e.food.harga })))
+    const [allquantity, setallquantity] = useState(data.map((e, i) => ({ id: e.id, quantity: e.quantity, harga: e.food.harga })))
     const [totalprice, settotalprice] = useState(data.reduce((total, item, i) => { return (total + (item.food.harga * item.quantity)); }, 0))
-    const [state,deleteaction,pending] = useActionState(deleteorder,null)
+    const [state, deleteaction, pending] = useActionState(deleteorder, null)
+    console.log(totalprice)
+
 
     async function increasequantity(id, i) {
         setallquantity(prev => prev.map(
@@ -24,7 +26,7 @@ export default function Foodcontain({ data, deleteorder }) {
         })
     }
 
-    async function decreasequantity(id,i) {
+    async function decreasequantity(id, i) {
         setallquantity(prev => prev.map(
             item => item.id === id ? {
                 ...item, quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity
@@ -35,6 +37,17 @@ export default function Foodcontain({ data, deleteorder }) {
             order_id: id,
         })
     }
+
+    useEffect(() => {
+        if (state?.code === 200) {
+            let deletedproduct = allquantity.filter(e => e.id === state?.id)
+            setallquantity(prev =>prev.filter(item => item.id !== state?.id)
+        )
+            settotalprice(prev => prev - deletedproduct[0].harga * deletedproduct[0].quantity)
+        }
+    }, [state])
+    console.log(allquantity)
+
 
     return (<div className="flex flex-col gap-1 items-center">
         <Orderadd error={state?.code !== 200} message={state?.message} pending={pending} show={state?.code === 200} />

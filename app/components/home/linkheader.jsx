@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import * as motion from "motion/react-client"
 export default function Linknavigate() {
     const pathname = usePathname()
     function colorlink(link) {
@@ -12,9 +13,21 @@ export default function Linknavigate() {
     }
     return (
         <>
-            <Link href={"/"} className={`w-26 h-10 flex justify-center items-center bg-linear-to-tl rounded-2xl ${colorlink("/")} font-semibold text-2xl`} > Food </Link>
-            <Link href={"/drink"} className={`w-26 h-10 flex justify-center items-center bg-linear-to-tl rounded-2xl ${colorlink("/drink")} font-semibold text-2xl`} > drink </Link>
-            <Link href={"/snacks"} className={`w-26 h-10 flex justify-center items-center bg-linear-to-tl rounded-2xl ${colorlink("/snacks")} font-semibold text-2xl`} > snacks </Link>
+            <motion.button whileTap={{ scale: 0.8 }} >
+                <Link href={"/"} className={`w-26 h-10 flex justify-center items-center bg-linear-to-tl rounded-2xl ${colorlink("/")} font-semibold text-2xl`} >
+                    Food
+                </Link>
+            </motion.button>
+            <motion.button whileTap={{ scale: 0.8 }} >
+                <Link href={"/drink"} className={`w-26 h-10 flex justify-center items-center bg-linear-to-tl rounded-2xl ${colorlink("/drink")} font-semibold text-2xl`}>
+                    drink
+                </Link>
+            </motion.button>
+            <motion.button whileTap={{ scale: 0.8 }} >
+                <Link href={"/snacks"} className={`w-26 h-10 flex justify-center items-center bg-linear-to-tl rounded-2xl ${colorlink("/snacks")} font-semibold text-2xl`} >
+                    snacks
+                </Link>
+            </motion.button>
         </>
     )
 }

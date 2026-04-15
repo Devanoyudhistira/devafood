@@ -6,12 +6,12 @@ import { createClient } from "../supabase/server";
 
 export async function deleteorder(prev,Formdata) {
   const id = Formdata.get("id");
-  const { error } = await supabase.from("order").delete().eq("id", id);
+  const { error,data } = await supabase.from("order").delete().eq("id", id).select("id").single();  
   if (error) {
     return { code: 402, message: "gagal silahkan coba lagi" };
   }
-  revalidatePath("/detail");
-  return { code: 200, message: "order berhasil dihapus" };
+  revalidatePath("/preview");
+  return { code: 200, message: "order berhasil dihapus",id:data.id };
 }
 
 
