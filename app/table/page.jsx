@@ -12,10 +12,10 @@ export default async function Page() {
     const { data } = await supabase.from("meja").select("*").order("nomer_meja", { ascending: true })
     console.log("ini percobaan")
     console.log({thedata:data,message:"Test"})
-    console.log("RAW STATUS:", e.status)
-    console.log("STRINGIFIED:", JSON.stringify(e.status))
-    console.log("LENGTH:", e.status?.length)
-    console.log("EQUAL:", e.status === "kosong")
+    console.log("RAW STATUS:", data[0].status)
+    console.log("STRINGIFIED:", JSON.stringify(data[0].status))
+    console.log("LENGTH:", data[0].length)
+    console.log("EQUAL:", data[0] === "kosong")
     return (
         <main className="px-1 pb-10 flex flex-col items-center" >
             <nav className="w-screen h-12 flex items-center text-md text-orange-800 font-semibold" >
