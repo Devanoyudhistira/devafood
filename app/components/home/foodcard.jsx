@@ -29,7 +29,7 @@ export default function Foodcard({ nama, harga, image, desc, id, addorder }) {
             </div>
             <div className=" w-full h-15 flex  justify-between items-center " >
                 <Link href={`/detail/${id}`}>
-                    <motion.button whileTap={{ scale: 0.8 }} className="inline-block w-77 px-4 py-1 text-center text-md rounded-md h-max bg-linear-to-t from-orange-500 to-yellow-400"  >
+                    <motion.button whileTap={{ scale: 0.8 }} className="inline-block w-57 px-4 py-1 text-center text-md rounded-md h-max bg-linear-to-t from-orange-500 to-yellow-400"  >
                         See detail
                     </motion.button>
                 </Link>
