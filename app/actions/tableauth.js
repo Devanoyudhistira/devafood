@@ -23,6 +23,7 @@ export default async function Login(prev,formdata) {
   
   console.log(updateerror)
   console.log(updatedata)
+  revalidatePath("/table")
   revalidatePath("/");  
   return { code: 200, message: "pemilihan meja telah berhasil",data:updatedata ,errorupt:updateerror};
 }
