@@ -9,7 +9,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Cart } from "react-bootstrap-icons"
 import { ArrowLeft } from "react-bootstrap-icons"
-
+import * as motion from "motion/react-client"
 export default async function Page({ params }) {
     const { slug } = await params
     const { data } = await supabase.from("food").select("*").eq("id", slug).single()
@@ -34,7 +34,7 @@ export default async function Page({ params }) {
                 </aside>
                 <Formaction action={addorder} >
                     <input type="text" value={food.id} name="id" id="id" hidden />
-                    <button type="submit" className="w-full text-white text-3xl font-bold h-15 flex items-center gap-2 justify-center rounded-full bg-linear-to-tl from-orange-500 to-yellow-400" > add to order <Cart size={25} /> </button>
+                    <motion.button whileTap={{ scale:0.8 }} type="submit" className="w-full text-white text-3xl font-bold h-15 flex items-center gap-2 justify-center rounded-full bg-linear-to-tl from-orange-500 to-yellow-400" > add to order <Cart size={25} /> </motion.button>
                 </Formaction>
             </div>
 
