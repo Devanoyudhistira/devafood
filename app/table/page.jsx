@@ -7,7 +7,7 @@ import { ForkKnife } from "react-bootstrap-icons"
 import Link from "next/link";
 import supabase from "../supabase/supabase";
 import Login from "../actions/tableauth";
-export const dynamic = "force-dynamic"  // 👈 PUT IT HERE
+export const dynamic = "force-dynamic" 
 
 export default async function Page() {
     const { data } = await supabase.from("meja").select("*").order("nomer_meja", { ascending: true })
