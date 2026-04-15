@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function Tableinput({ color, textcolor ,text,nomor,kursi,loginact,email,password}) {
     const router = useRouter()
-    const [state,logintable,pending] = useActionState(loginact,null)
-    console.log(state)
+    const [state,logintable,pending] = useActionState(loginact,null)    
     if(state?.code === 200){
         router.push("/")
     }
