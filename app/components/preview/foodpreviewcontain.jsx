@@ -8,10 +8,8 @@ import Orderadd from "../flashmessage/orderadd";
 
 
 export default function Foodcontain({ data, deleteorder }) {
-    const [allquantity, setallquantity] = useState(data.map((e, i) => ({ id: e.id, quantity: e.quantity, harga: e.food.harga })))
-    const [totalprice, settotalprice] = useState(data.reduce((total, item, i) => { return (total + (item.food.harga * item.quantity)); }, 0))
-    const [state, deleteaction, pending] = useActionState(deleteorder, null)
-    console.log(totalprice)
+    const [allquantity, setallquantity] = useState(data.map((e, i) => ({ id: e.id, quantity: e.quantity, harga: e.food.harga })))    
+    const [state, deleteaction, pending] = useActionState(deleteorder, null)    
 
 
     async function increasequantity(id, i) {
@@ -19,8 +17,7 @@ export default function Foodcontain({ data, deleteorder }) {
             item => item.id === id ? {
                 ...item, quantity: item.quantity + 1
             } : item
-        ))
-        settotalprice(prev => prev + allquantity[i].harga)
+        ))        
         const { error } = await supabase.rpc("quantity_increase", {
             order_id: id,
         })
@@ -31,20 +28,16 @@ export default function Foodcontain({ data, deleteorder }) {
             item => item.id === id ? {
                 ...item, quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity
             } : item
-        ))
-        settotalprice(prev => prev - allquantity[i].harga)
+        ))        
         const { error } = await supabase.rpc("quantity_decrease", {
             order_id: id,
         })
     }
 
     useEffect(() => {
-        if (state?.code === 200) {
-            let deletedproduct = allquantity.filter(e => e.id === state?.id)
+        if (state?.code === 200) {            
             setallquantity(prev =>prev.filter(item => item.id !== state?.id)
-        )
-            settotalprice(prev => prev - deletedproduct[0].harga * deletedproduct[0].quantity)
-        }
+        )}
     }, [state])
     console.log(allquantity)
 
@@ -59,7 +52,7 @@ export default function Foodcontain({ data, deleteorder }) {
 
         <div className={`w-[85%] flex justify-between items-center px-3 h-24 bg-orange-200 rounded-2xl`} >
             <h1 className="text-2xl font-semibold  capitalize" > total </h1>
-            <h2 className="text-2xl text-orange-600 font-extrabold " > {convertToMoney(totalprice)} </h2>
+            <h2 className="text-2xl text-orange-600 font-extrabold " > {convertToMoney(allquantity.reduce((total, item, i) => { return (total + (item.harga * item.quantity)); }, 0))} </h2>
         </div>
 
     </div>)
