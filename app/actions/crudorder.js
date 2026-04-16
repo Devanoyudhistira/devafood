@@ -22,18 +22,21 @@ export async function addorder(prev, Formdata) {
   const { data: user } = await supabaseserver.auth.getUser();
   const { data: table } = await supabase
     .from("meja")
-    .select("nomer_meja")
+    .select("id")
     .eq("uuid", user.user.id)
     .single();
 
   const { error } = await supabase
     .from("order")
     .upsert({
-      table: table.nomer_meja,
+      table: table.id,
       food: id,
+      quantity:1
     })
     .select("*")
     .single();
+    console.log(table.nomer_meja)
+    console.log(error)
 
   if (error) {
     return { code: 402, message: "gagal silahkan coba lagi" };

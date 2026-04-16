@@ -38,8 +38,7 @@ export default function Foodcontain({ data, deleteorder }) {
         if (state?.code === 200) {            
             setallquantity(prev =>prev.filter(item => item.id !== state?.id)
         )}
-    }, [state])
-    console.log(allquantity)
+    }, [state])    
 
 
     return (<div className="flex flex-col gap-1 items-center">

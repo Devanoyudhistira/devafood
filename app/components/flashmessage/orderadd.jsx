@@ -23,7 +23,7 @@ export default function Orderadd({ show, pending,message,error }) {
 
     return (
         <AnimatePresence >
-            {showmessage && <motion.div exit={{ opacity: 0, scale: 0 }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} className={`fixed top-14 left-[6vw] text-md ${error ? "bg-red-100 border-red-300" : "bg-green-100 border-green-300"} bg-green-100 border-green-300 border-2 gap-3  w-85 h-14 flex items-center justify-center rounded-2xl`} >                
+            {showmessage && <motion.div exit={{ opacity: 0, scale: 0 }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} className={`fixed top-14 left-[6vw] text-md ${error ? "bg-red-100 border-red-300" : "bg-green-100 border-green-300"} bg-green-100 z-99999 border-green-300 border-2 gap-3  w-85 h-14 flex items-center justify-center rounded-2xl`} >                
                     {error ? <XCircleFill color="red" size={25} />  : <CheckCircleFill size={20} color="green" />}
                     <h1 className={`${error ? "text-red-600" : "text-green-400"} font-bold`} > {message} </h1>                         
             </motion.div>}

@@ -6,11 +6,6 @@ import { useActionState, useEffect, useState } from "react"
 export default function Formaction({ children, action }) {
     const [state, addorder, pending] = useActionState(action, null)
     const [Result, setResult] = useState(state?.code === 200)
-    console.log(state)
-
-  
-
-
     return (
         <>
 

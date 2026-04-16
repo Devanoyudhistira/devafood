@@ -11,7 +11,9 @@ import Orderadd from "../flashmessage/orderadd"
 import { useActionState } from "react"
 
 export default function Foodcard({ nama, harga, image, desc, id, addorder }) {
+
     const [state,orderact,pending] = useActionState(addorder,null)
+    
     return (<div className={`w-full h-max bg-white flex flex-col rounded-2xl overflow-hidden shadow-xl shadow-gray-700/30 relative`} >
         <Orderadd error={state?.code !== 200} pending={pending} message={state?.message} show={state?.code === 200} />
         <Image width={600} height={600} src={`https://bmqqribeuxnppfcxittg.supabase.co/storage/v1/object/public/devafood/${image}`} className="w-full bg-black h-58 flex-none object-center object-cover" alt={nama} />
