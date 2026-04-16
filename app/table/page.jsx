@@ -6,7 +6,7 @@ import { Bag } from "react-bootstrap-icons"
 import { ForkKnife } from "react-bootstrap-icons"
 import Link from "next/link";
 import supabase from "../supabase/supabase";
-import Login from "../actions/tableauth";
+import {Login} from "../actions/tableauth";
 export const dynamic = "force-dynamic" 
 
 export default async function Page() {
