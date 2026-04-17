@@ -27,7 +27,6 @@ export async function POST(Request) {
       order_id: Math.ceil(Math.floor(Math.random() * 1000).toString() + id),
       gross_amount: grossprice,
     },
-    enabled_payments:["bank_transfer"],
     item_details: {
       name: produk,
       id: Math.ceil(Math.floor(Math.random() * 1000).toString() + id),

@@ -31,13 +31,13 @@ export default function Foodcontain({ data, deleteorder }) {
         console.log(token);
         window.snap.pay(token, {
             onSuccess: function (result) {
-                window.location.href = `/`;
+                window.location.href = `/wait`;
             },
             onPending: function (result) {
-                window.location.href = `/`;
+                window.location.href = `/wait`;
             },
             onError: function (result) {
-                window.location.href = `/`;
+                window.location.href = `/wait`;
             },
             onClose: function (res) {
                 `/`
@@ -92,6 +92,7 @@ export default function Foodcontain({ data, deleteorder }) {
 
     useEffect(() => {
         if (state?.code === 200) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setallquantity(prev => prev.filter(item => item.id !== state?.id)
             )
         }
