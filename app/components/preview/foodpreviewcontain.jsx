@@ -7,13 +7,13 @@ import { useActionState } from "react";
 import Orderadd from "../flashmessage/orderadd";
 
 
-export default function Foodcontain({ data, deleteorder }) {
+export default function Foodcontain({ data, deleteorder,tableid }) {
     const [allquantity, setallquantity] = useState(data.map((e, i) => ({ id: e.id, quantity: e.quantity, harga: e.food.harga })))
     const [state, deleteaction, pending] = useActionState(deleteorder, null)
 
-    async function purchase(e, id, quantity, nama_pembeli, email_pembeli, nomor_pembeli) {
+    async function purchase(e) {
         const baseurl = window.location.origin
-        e.preventDefault();        
+        e.preventDefault();      
         const transaction = await fetch(`${baseurl}/api/purchase`, {
             method: "POST",
             headers: {
@@ -22,9 +22,9 @@ export default function Foodcontain({ data, deleteorder }) {
             body: JSON.stringify({
                 produk: allquantity[0].id,
                 harga: allquantity.reduce((total, item, i) => { return (total + (item.harga * item.quantity)); }, 0),
-                quantity: 1,
-                grossprice: allquantity.reduce((total, item, i) => { return (total + (item.harga * item.quantity)); }, 0),
-                id: 2,                
+                quantity: 1,                
+                id: 2,     
+                namapembeli:tableid           
             }),
         })
         const token = await transaction.json();
@@ -34,13 +34,13 @@ export default function Foodcontain({ data, deleteorder }) {
                 window.location.href = `/wait`;
             },
             onPending: function (result) {
-                window.location.href = `/wait`;
+                window.location.href = `/preview`;
             },
             onError: function (result) {
-                window.location.href = `/wait`;
+                window.location.href = `/preview`;
             },
             onClose: function (res) {
-                `/`
+                `/preview`
             },
         });
         const responsepurchase = await fetch(

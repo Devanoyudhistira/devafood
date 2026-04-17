@@ -19,13 +19,12 @@ export async function POST(Request) {
     id,
     namapembeli,
     emailpembeli,
-    nomorpembeli,
-    grossprice,
+    nomorpembeli,    
   } = await Request.json();  
   let parameter = {
     transaction_details: {
       order_id: Math.ceil(Math.floor(Math.random() * 1000).toString() + id),
-      gross_amount: grossprice,
+      gross_amount: harga,
     },
     item_details: {
       name: produk,
@@ -34,6 +33,12 @@ export async function POST(Request) {
       quantity: 1,
     }, 
   };
+
+  const {data} = await supabase.from("recipient").insert({
+    meja:namapembeli,
+    grossprice:harga,
+    status:"waiting"
+  })
   
   const response = await snap.createTransaction(parameter);  
   return NextResponse.json(response.token);

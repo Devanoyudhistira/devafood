@@ -19,7 +19,7 @@ export default async function Page() {
             </nav>
             <h3 className="text-5xl ml-3 mt-2 font-medium text-orange-900" > Review order </h3>
             <h1 className="text-xl font-bold text-orange-600" > Pilihan anda </h1>
-            <Foodcontain deleteorder={deleteorder} data={data} />
+            <Foodcontain tableid={table.id} deleteorder={deleteorder} data={data} />
             <Footer status={"preview"} />
         </div>
     )
