@@ -21,6 +21,13 @@ export default function Recipientpage({ initialData }) {
                     if (payload.eventType === "INSERT") {
                         setRecipient(prev => [...prev, payload.new])
                     }
+                    if (payload.eventType === "UPDATE") {
+                        setRecipient(prev =>
+                            prev.map(item =>
+                                item.id === payload.new.id ? payload.new : item
+                            )
+                        )
+                    }
                 }
             )
             .subscribe()

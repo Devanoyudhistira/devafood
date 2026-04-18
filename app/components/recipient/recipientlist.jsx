@@ -61,9 +61,7 @@ export default function Recipientlist({ tableid, status, harga, id }) {
                     <h1 className="text-2xl font-semibold text-orange-500">
                         {convertToMoney(harga)}
                     </h1>
-                </div>
-
-                {/* server action still works */}
+                </div>                
                 <form action={Updaterecipient.bind(null, id)}>
                     <button
                         type="submit"

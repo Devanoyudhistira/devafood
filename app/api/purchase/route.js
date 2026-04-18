@@ -28,7 +28,7 @@ export async function POST(Request) {
     },
     item_details: {
       name: produk,
-      id: Math.ceil(Math.floor(Math.random() * 1000).toString() + id),
+      id: Math.ceil(Math.floor(Math.random() * 1000).toString() + id + namapembeli + Math.random() * 580),
       price: harga,
       quantity: 1,
     }, 
