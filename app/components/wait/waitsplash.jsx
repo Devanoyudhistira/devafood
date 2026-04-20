@@ -37,9 +37,9 @@ export default function Waitsplash({ initialdata }) {
     }, [])
 
     return (
-        <div className="w-screen flex flex-col gap-2  items-center justify-center" >
-            <div className={`w-55 h-55 border-4 border-white shadow-2xl shadow-orange-800/50 mt-30 bg-orange-700 rounded-full flex items-center justify-center`} >
-               {orderdata.status === "done" ? <Check size={95} />  : <ForkKnife size={90} />}
+        <div className="w-screen flex flex-col gap-6 items-center justify-center " >
+            <div className={`w-55 h-55 border-4 border-white shadow-2xl shadow-orange-800/50 mt-30 ${orderdata.status === "done" ? "bg-green-400": "bg-orange-700"  } rounded-full flex items-center justify-center`} >
+               {orderdata.status === "done" ? <Check size={125} />  : <ForkKnife size={90} />}
             </div>
            {orderdata.status !== "done" && <h1 className="text-3xl text-center font-semibold text-orange-800" > Chef sedang memasak makanan anda </h1>}
            {orderdata.status === "done" &&
