@@ -4,11 +4,6 @@ import * as motion from "motion/react-client"
 
 const jakarta = Plus_Jakarta_Sans({})
 
-export const metadata = {
-  title: "Devano food",
-  description: "the restaurant from devano",
-};
-
 export default function RootLayout({ children }) {
   return (
     <html

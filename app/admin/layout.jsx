@@ -1,4 +1,8 @@
 import { People } from "react-bootstrap-icons";
+export const metadata = {
+  title: "Admin page",
+  description: "page for admin",
+};
 
 export default function Layoutadmin({children}){
     return(

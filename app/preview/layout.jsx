@@ -2,6 +2,11 @@ import { createClient } from "../supabase/server";
 import supabase from "../supabase/supabase";
 import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "Your order",
+  description: "devano food menu",
+};
+
 export default async function layout({ children }) {
     const supabaseserver = await createClient()
     const { data } = await supabaseserver.auth.getUser()
