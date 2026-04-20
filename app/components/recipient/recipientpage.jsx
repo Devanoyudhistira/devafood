@@ -27,6 +27,17 @@ export default function Recipientpage({ initialData }) {
                                 item.id === payload.new.id ? payload.new : item
                             )
                         )
+                        if (payload.new.status === "done") {
+                            setRecipient(prev =>
+                                prev.filter(item =>
+                                    item.id !== payload.new.id
+                                ))
+                        }
+                    }
+                    if (payload.eventType === "DELETE") {
+                        setRecipient(prev =>
+                            prev.filter(item => item.id !== payload.old.id)
+                        );
                     }
                 }
             )

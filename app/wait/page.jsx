@@ -21,13 +21,13 @@ export default async function page() {
             </div>
             <div className="w-full px-1.5 flex flex-col justify-between items-center" >
                 <div className="w-full flex justify-between items-center" >
-                    <div className="flex flex-col gap-2" >
+                    <div className="flex flex-col" >
                         <h2 className="text-xs font-medium text-orange-500 " > Order-id </h2>
-                        <h3 className="text-md font-semibold text-orange-900 " > 002321 </h3>
+                        <h3 className="text-md font-semibold  text-orange-900 " > 002321 </h3>
                     </div>
                     <div className="flex flex-col gap-2" >
                         <h2 className="text-xs font-medium text-orange-500 " > table </h2>
-                        <h3 className="text-md font-semibold text-orange-900 " > {table.nomer_meja} </h3>
+                        <h3 className="text-md text-center font-semibold text-orange-900 " > {table.nomer_meja} </h3>
                     </div>
                 </div>
                 <div className="flex self-start flex-col gap-2" >
