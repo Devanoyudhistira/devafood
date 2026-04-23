@@ -7,6 +7,7 @@ import supabase from "../supabase/supabase";
 
 export async function Loginadmin(prev, formdata) {
   const supabaseserver = await createClient();
+  const {error:logouterror} = supabaseserver.auth.signOut()
   const email = formdata.get("email");
   const password = formdata.get("password");
   const { data, error } = await supabaseserver.auth.signInWithPassword({
@@ -18,7 +19,6 @@ export async function Loginadmin(prev, formdata) {
     .from("admin")
     .select("id")
     .eq("uuid", data.user.id).single();    
-
     if(!admindata)return { error: true, message: "anda bukan admin" };
 redirect("admin/orders")
 }

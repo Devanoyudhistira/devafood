@@ -25,10 +25,18 @@ export default async function RootLayout({ children }) {
   if (!session.session) {
     redirect("/table")
   }
+  const { data: user } = await supabaseserver.auth.getUser()
+  const { data: admindata, error: adminerror } = await supabase
+    .from("admin")
+    .select("id")
+    .eq("uuid", user.user.id).single();
+  if (admindata) {
+    redirect("/admin")
+  }
   const userid = data?.user.id
   const { data: tabledata } = await supabase.from("meja").select("nomer_meja").eq("uuid", userid).single()
   return (
-    <main className="flex flex-col items-center w-full h-auto pb-18">      
+    <main className="flex flex-col items-center w-full h-auto pb-18">
       <Navbar logoutbutton={Logout} text={tabledata.nomer_meja} />
       <div className="w-full mt-4 px-4 py-1 " >
         <h5 className="text-md font-semibold text-orange-900" > Selamat datang di devano_Food </h5>

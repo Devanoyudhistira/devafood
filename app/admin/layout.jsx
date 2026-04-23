@@ -1,4 +1,5 @@
 import { createClient } from "../supabase/server";
+import supabase from "../supabase/supabase";
 import { redirect } from "next/navigation";
 import { People } from "react-bootstrap-icons";
 export const metadata = {
@@ -8,8 +9,12 @@ export const metadata = {
 
 export default async function Layoutadmin({ children }) {
     const supabaseserver = await createClient()
-    const { data: user } = await supabaseserver.auth.getSession()
-    if(!user.session){
+    const { data: user } = await supabaseserver.auth.getUser()
+    const { data: admindata, error: adminerror } = await supabase
+        .from("admin")
+        .select("id")
+        .eq("uuid", user.user.id).single();
+    if (!admindata) {
         redirect("/")
     }
     return (
