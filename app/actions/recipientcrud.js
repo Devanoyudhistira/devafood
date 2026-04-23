@@ -4,12 +4,12 @@ import supabase from "../supabase/supabase";
 import { createClient } from "../supabase/server";
 
 export async function Updaterecipient(userid,Formdata) {
-  const id = Formdata.get("id");
   const {data,error} = await supabase.from("recipient").update({
     status:"done"
   }).eq("id",userid).select("id").single()
-  console.log(data)
-  console.log(error)
+
+  const {error:deleteerror} = await supabase.from("recipient").delete().eq("id",data.id)  
+  console.log(deleteerror)
   if (error) {
     return { code: 402, message: "gagal silahkan coba lagi" };
   }    

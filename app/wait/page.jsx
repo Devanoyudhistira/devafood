@@ -10,7 +10,8 @@ export default async function page() {
     const { data: user } = await supabaseserver.auth.getUser()
     const { data: table } = await supabase.from("meja").select("*").eq("uuid", user.user.id).single()
     const { data } = await supabase.from("order").select("id,food(name,gambar,harga),quantity").eq("table", table.id).order("id", { ascending: true }).limit(1).single()
-    const { data: recipient } = await supabase.from("recipient").select("*").eq("meja", table.id).single()
+    const { data: recipient } = await supabase.from("recipient").select("*").eq("meja",9).single()
+    console.log(recipient)
     return (<div className="flex flex-col items-center" >
         <Waitsplash initialdata={recipient} />
         <div className="w-[80%] py-3 mt-8 px-2 flex flex-col gap-2 bg-white rounded-xl" >
