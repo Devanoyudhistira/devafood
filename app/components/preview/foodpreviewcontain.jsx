@@ -99,15 +99,15 @@ export default function Foodcontain({ data, deleteorder,tableid }) {
     }, [state])
 
 
-    return (<div className="flex flex-col gap-1 items-center">
+    return (<div className="flex flex-col gap-1 items-center ">
         <Orderadd error={state?.code !== 200} message={state?.message} pending={pending} show={state?.code === 200} />
-        <div className="w-full h-98 overflow-x-hidden overflow-y-auto  px-1 mt-7 py-3 flex flex-col gap-4" >
+        <div className="w-full h-98 overflow-x-hidden overflow-y-auto  px-1 mt-7 py-3 flex flex-col gap-y-12"  >
             {data.map((e, i) =>
                 <Foodpreview index={i} increasequantity={increasequantity} decreasequantity={decreasequantity} deletefunc={deleteaction} key={e.id} id={e.id} gambar={e.food.gambar} nama={e.food.name} quantity={allquantity[i].quantity} harga={e.food.harga} />
             )}
         </div>
 
-        <div className={`w-[85%] flex justify-between items-center px-3 h-24 bg-orange-200 rounded-2xl`} >
+        <div className={`w-[85%] flex justify-between items-center px-3 h-24 bg-orange-200 rounded-2xl mt-8`} >
             <h1 className="text-2xl font-semibold  capitalize" > total </h1>
             <h2 className="text-2xl text-orange-600 font-extrabold " > {convertToMoney(allquantity.reduce((total, item, i) => { return (total + (item.harga * item.quantity)); }, 0))} </h2>
         </div>

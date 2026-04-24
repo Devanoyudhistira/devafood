@@ -18,6 +18,8 @@ export async function deleteorder(prev,Formdata) {
 
 export async function addorder(prev, Formdata) {
   const id = Formdata.get("id");
+  const topping = Formdata.getAll("topping")
+  console.log(topping)
   const supabaseserver = await createClient();
   const { data: user } = await supabaseserver.auth.getUser();
   const { data: table } = await supabase
@@ -31,7 +33,8 @@ export async function addorder(prev, Formdata) {
     .upsert({
       table: table.id,
       food: id,
-      quantity:1
+      quantity:1,
+      toppings:topping
     })
     .select("*")
     .single();

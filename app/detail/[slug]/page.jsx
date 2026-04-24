@@ -10,13 +10,15 @@ import Link from "next/link"
 import { Cart } from "react-bootstrap-icons"
 import { ArrowLeft } from "react-bootstrap-icons"
 import * as motion from "motion/react-client"
+import { Check2Square } from "react-bootstrap-icons"
 export default async function Page({ params }) {
     const { slug } = await params
     const { data } = await supabase.from("food").select("*").eq("id", slug).single()
+    const { data: topping } = await supabase.from("toppings").select("nama,makanan,harga,id").eq("makanan", data.id)
     /** @type {Food{}} */
-    const food = data        
+    const food = data
     return (
-        <main className="pb-15" >            
+        <main className="pb-15" >
             <nav className="w-screen h-15 flex px-4 items-center gap-3 " >
                 <Link href={"/"} >
                     <ArrowLeft size={25} />
@@ -33,8 +35,21 @@ export default async function Page({ params }) {
                     {food.description}
                 </aside>
                 <Formaction action={addorder} >
+                    <div className="w-full h-max px-2 rounded-3xl flex flex-col gap-3" >
+                        <h1 className="text-2xl font-extrabold text-orange-500" > Pilih topping </h1>
+                        {topping.map(e =>
+                            <label htmlFor={e.id} key={e.id} className="text-orange-800 has-checked:bg-orange-200 has-checked:border-2 border-orange-900 has-checked:text-orange-900 transition bg-white rounded-md w-full py-1.5 px-4 flex justify-between items-center ">
+                                <input type="checkbox" hidden name="topping" className="peer" value={e.id} id={e.id} />
+                                <div>
+                                    <h1 className="text-md font-semibold text-orange-900" > {e.nama} </h1>
+                                    <h2 className="text-xs font-medium text-orange-800" > {convertToMoney(e.harga)} </h2>
+                                </div>
+                                <Check2Square color="orange" size={25} className="peer-checked:opacity-100 opacity-0 transition " />
+                            </label>
+                        )}
+                    </div>
                     <input type="text" value={food.id} name="id" id="id" hidden />
-                    <motion.button whileTap={{ scale:0.8 }} type="submit" className="w-full text-white text-3xl font-bold h-15 flex items-center gap-2 justify-center rounded-full bg-linear-to-tl from-orange-500 to-yellow-400" > add to order <Cart size={25} /> </motion.button>
+                    <motion.button whileTap={{ scale: 0.8 }} type="submit" className="w-full mt-5 text-white text-3xl font-bold h-15 flex items-center gap-2 justify-center rounded-full bg-linear-to-tl from-orange-500 to-yellow-400" > add to order <Cart size={25} /> </motion.button>
                 </Formaction>
             </div>
 

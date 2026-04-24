@@ -6,8 +6,8 @@ import { DashLg } from "react-bootstrap-icons";
 import { Plus } from "react-bootstrap-icons";
 import * as motion from "motion/react-client"
 
-export default function Foodpreview({ index,nama, gambar, harga, id, quantity, deletefunc,increasequantity,decreasequantity }) {
-    
+export default function Foodpreview({ index, nama, gambar, harga, id, quantity, deletefunc, increasequantity, decreasequantity }) {
+
 
     return (
         <div className="w-full h-30 px-1 gap-1  rounded-xl flex justify-between items-center" >
@@ -21,12 +21,22 @@ export default function Foodpreview({ index,nama, gambar, harga, id, quantity, d
                     </form>
                 </div>
                 <p className="text-xs font-light text-orange-800" > Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, quae </p>
+                <div className="flex flex-col gap-1 text-xs font-semibold text-orange-800 mt-1" >
+                    <div className="flex gap-1 bg-orange-300 rounded-full px-2 py-1 w-max" >
+                        <h1> salad </h1>
+                        <h2 className="font-light text-orange-600" > Rp 2.000 </h2>
+                    </div>
+                      <div className="flex gap-1 bg-orange-300 rounded-full px-2 py-1 w-max" >
+                        <h1> mayonnaise </h1>
+                        <h2 className="font-light text-orange-600" > Rp 10.000 </h2>
+                    </div>
+                </div>
                 <div className="flex justify-center items-center gap-2" >
-                    <h1 className="text-orange-600 font-extrabold" > {convertToMoney(harga * quantity )} </h1>
+                    <h1 className="text-orange-600 font-extrabold" > {convertToMoney(harga * quantity)} </h1>
                     <div className="flex gap-4 bg-white overflow-hidden rounded-xl items-center justify-center" >
-                        <motion.button whileTap={{ scale:0.9 }} onClick={() => increasequantity(id,index) } className="p-2 z-1000 text-2xl cursor-pointer  " > <Plus /></motion.button>
+                        <motion.button whileTap={{ scale: 0.9 }} onClick={() => increasequantity(id, index)} className="p-2 z-1000 text-2xl cursor-pointer  " > <Plus /></motion.button>
                         <h1> {quantity} </h1>
-                        <motion.button whileTap={{ scale:0.9 }} disabled={quantity === 1} onClick={ () => decreasequantity(id,index)} className="p-2 z-1000 text-2xl cursor-pointer " > <DashLg /></motion.button>
+                        <motion.button whileTap={{ scale: 0.9 }} disabled={quantity === 1} onClick={() => decreasequantity(id, index)} className="p-2 z-1000 text-2xl cursor-pointer " > <DashLg /></motion.button>
                     </div>
                 </div>
             </div>
