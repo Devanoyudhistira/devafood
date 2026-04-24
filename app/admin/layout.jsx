@@ -21,7 +21,7 @@ export default async function Layoutadmin({ children }) {
         <div className="w-max h-max pb-10 " >
             <nav className="w-screen h-13 px-2 flex items-center border-b border-orange-950 gap-4" >
                 <People size={25} />
-                <h1 className="text-xl font-semibold text-orange-600" > Devafood </h1>
+                <h1 className="text-xl font-extrabold text-orange-600" > Panama </h1>
             </nav>
             {children}
         </div>
