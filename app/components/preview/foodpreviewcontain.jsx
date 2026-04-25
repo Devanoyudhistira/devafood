@@ -7,13 +7,15 @@ import { useActionState } from "react";
 import Orderadd from "../flashmessage/orderadd";
 
 
-export default function Foodcontain({ data, deleteorder,tableid }) {
+export default function Foodcontain({ data, deleteorder, tableid }) {
     const [allquantity, setallquantity] = useState(data.map((e, i) => ({ id: e.id, quantity: e.quantity, harga: e.food.harga })))
     const [state, deleteaction, pending] = useActionState(deleteorder, null)
+    const [topping, settopping] = useState()
+
 
     async function purchase(e) {
         const baseurl = window.location.origin
-        e.preventDefault();      
+        e.preventDefault();
         const transaction = await fetch(`${baseurl}/api/purchase`, {
             method: "POST",
             headers: {
@@ -22,9 +24,9 @@ export default function Foodcontain({ data, deleteorder,tableid }) {
             body: JSON.stringify({
                 produk: allquantity[0].id,
                 harga: allquantity.reduce((total, item, i) => { return (total + (item.harga * item.quantity)); }, 0),
-                quantity: 1,                
-                id: 2,     
-                namapembeli:tableid           
+                quantity: 1,
+                id: 2,
+                namapembeli: tableid
             }),
         })
         const token = await transaction.json();
@@ -103,7 +105,7 @@ export default function Foodcontain({ data, deleteorder,tableid }) {
         <Orderadd error={state?.code !== 200} message={state?.message} pending={pending} show={state?.code === 200} />
         <div className="w-full h-98 overflow-x-hidden overflow-y-auto  px-1 mt-7 py-3 flex flex-col gap-y-12"  >
             {data.map((e, i) =>
-                <Foodpreview index={i} increasequantity={increasequantity} decreasequantity={decreasequantity} deletefunc={deleteaction} key={e.id} id={e.id} gambar={e.food.gambar} nama={e.food.name} quantity={allquantity[i].quantity} harga={e.food.harga} />
+                <Foodpreview toppings={e.toppings} index={i} increasequantity={increasequantity} decreasequantity={decreasequantity} deletefunc={deleteaction} key={e.id} id={e.id} gambar={e.food.gambar} nama={e.food.name} quantity={allquantity[i].quantity} harga={e.food.harga} />
             )}
         </div>
 
@@ -111,7 +113,7 @@ export default function Foodcontain({ data, deleteorder,tableid }) {
             <h1 className="text-2xl font-semibold  capitalize" > total </h1>
             <h2 className="text-2xl text-orange-600 font-extrabold " > {convertToMoney(allquantity.reduce((total, item, i) => { return (total + (item.harga * item.quantity)); }, 0))} </h2>
         </div>
-        <button className="w-[90%] rounded-2xl h-15 text-xl font-extrabold bg-orange-600" onClick={(e) => purchase(e) } > Purchase </button>
+        <button className="w-[90%] rounded-2xl h-15 text-xl font-extrabold bg-orange-600" onClick={(e) => purchase(e)} > Purchase </button>
 
     </div>)
 }

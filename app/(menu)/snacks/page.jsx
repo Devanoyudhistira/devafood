@@ -18,7 +18,7 @@ import Menucontainer from "@/app/components/home/menucontainer";
 
 
 export default async function Home() {  
-  const { data } = await supabase.from("food").select("*").eq("jenis", "snacks")
+  const { data } = await supabase.from("food").select("*").eq("jenis", "snack")
   /** @type {Food[]} */
   const food = data ?? []  
   return (

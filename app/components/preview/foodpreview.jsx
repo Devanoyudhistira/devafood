@@ -5,8 +5,20 @@ import { Trash } from "react-bootstrap-icons";
 import { DashLg } from "react-bootstrap-icons";
 import { Plus } from "react-bootstrap-icons";
 import * as motion from "motion/react-client"
+import { useEffect, useState } from "react";
+import supabase from "@/app/supabase/supabase";
 
-export default function Foodpreview({ index, nama, gambar, harga, id, quantity, deletefunc, increasequantity, decreasequantity }) {
+export default function Foodpreview({ index, nama, gambar, harga, id, quantity, deletefunc, increasequantity, decreasequantity, toppings }) {
+    const [topping, settopping] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data: toppingdata, error: toppingerror } = await supabase
+                .from("toppings").select("*").in("id", toppings)
+                 settopping(toppingdata)
+        }
+        fetchData()
+    })
 
 
     return (
@@ -22,14 +34,12 @@ export default function Foodpreview({ index, nama, gambar, harga, id, quantity, 
                 </div>
                 <p className="text-xs font-light text-orange-800" > Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, quae </p>
                 <div className="flex flex-col gap-1 text-xs font-semibold text-orange-800 mt-1" >
-                    <div className="flex gap-1 bg-orange-300 rounded-full px-2 py-1 w-max" >
-                        <h1> salad </h1>
-                        <h2 className="font-light text-orange-600" > Rp 2.000 </h2>
+                    {topping.length > 0 && topping.map(e => 
+                    <div key={e.id} className="flex gap-1 bg-orange-300 rounded-full px-2 py-1 w-max" >
+                        <h1> {e.nama} </h1>
+                        <h2 className="font-light text-orange-600" > {e.harga} </h2>
                     </div>
-                      <div className="flex gap-1 bg-orange-300 rounded-full px-2 py-1 w-max" >
-                        <h1> mayonnaise </h1>
-                        <h2 className="font-light text-orange-600" > Rp 10.000 </h2>
-                    </div>
+                    )}
                 </div>
                 <div className="flex justify-center items-center gap-2" >
                     <h1 className="text-orange-600 font-extrabold" > {convertToMoney(harga * quantity)} </h1>
