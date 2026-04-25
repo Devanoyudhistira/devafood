@@ -26,7 +26,7 @@ export default function Foodinputimage({originalvalue}) {
 
     return (<>
         <label htmlFor="foodimage" className="w-full h-70 mt-4 has-invalid:border-red-500 flex items-center justify-center" >
-            {!preview && <div className="w-full  h-75 text-orange-950 rounded-md bg-orange-100 border-dashed border-2 flex flex-col gap-3 items-center justify-center border-orange-400" >
+            {!preview && <div className="w-full  h-75 text-orange-950 rounded-md text-center bg-orange-100 border-dashed border-2 flex flex-col gap-3 items-center justify-center border-orange-400" >
                     <Camera size={130} />
                     <h1 className="text-xl font-semibold " > silahkan memilih gambar makanan </h1>
                     <p className="text-md -mt-4 font-bold" > Gambar tidak boleh melebihi 6mb </p>

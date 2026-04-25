@@ -23,9 +23,10 @@ export default function Form ({loginact}){
                         <input placeholder="tulis password anda" className="text-xl ml-1.5 placeholder:text-gray-400 bg-gray-300 rounded-xl font-medium text-gray-950 py-2 px-2" type="password" id="password" name="password" />
                     </label>
                 </div>
-                <motion.button whileTap={{ scale:0.2 }} disabled={pending} className="w-full bg-orange-500 rounded-xl flex items-center justify-center shadow-md shadow-orange-800 h-max py-2 font-extrabold text-white text-2xl " >
+                <motion.button whileTap={{ scale:0.9 }} disabled={pending} className="w-full  bg-orange-500 rounded-xl flex items-center justify-center shadow-md shadow-orange-800 h-max py-2 font-extrabold text-white text-2xl " >
                    {pending ? <span className="flex gap-2 items-center" > <ClipLoader size={20} /> loading </span> : <span>Login</span> }
                 </motion.button>
+               {state?.error && <h1 className="text-2xl font-semibold text-red-600" > identitas anda salah </h1>}
             </form>
     )
 }

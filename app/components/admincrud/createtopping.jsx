@@ -35,14 +35,14 @@ export default function Createtopping() {
             <h1 className="text-3xl font-bold text-orange-600" >tambahkan topping</h1>
             {topping.map((e, i) =>
                 <div key={i} className="flex items-center gap-2 mt-3" >
-                    <input type="text" placeholder="tulis topping " value={topping[i].namatopping } onChange={el => updatename(i,el.currentTarget.value) } className="bg-orange-100 text-xl w-46 font-medium py-2 px-1 rounded-2xl placeholder:text-orange-300 text-orange-900 focus:border-2 border-orange-700 transition " name="namatopping" id="namatopping" />
-                    <input value={topping[i].harga } onChange={el => updateprice(i,el.currentTarget.value) }  type="number" placeholder="tulis harga " className="bg-orange-100 text-xl w-35 font-medium py-2 px-1 rounded-2xl placeholder:text-orange-300 text-orange-900 focus:border-2 border-orange-700 transition " name="hargatopping" id="hargatopping" />
+                    <input type="text" placeholder="tulis topping " value={topping[i].namatopping } onChange={el => updatename(i,el.currentTarget.value) } className="bg-orange-100 text-xl w-50 font-medium py-2 px-1 rounded-2xl placeholder:text-orange-300 text-orange-900 focus:border-2 border-orange-700 transition " name="namatopping" id="namatopping" />
+                    <input value={topping[i].harga } onChange={el => updateprice(i,el.currentTarget.value) }  type="number" placeholder="tulis harga " className="bg-orange-100 text-xl w-15 font-medium py-2 px-1 rounded-2xl placeholder:text-orange-300 text-orange-900 focus:border-2 border-orange-700 transition " name="hargatopping" id="hargatopping" />
                     <button type="button" onClick={() => deletetopping(i)} className="bg-orange-100 text-orange-950 rounded-xl p-2" >
                         <Trash size={25} />
                     </button>
                 </div>
             )}
-            <button type="button" onClick={addtoping} className="text-2xl font-semibold text-orange-800 flex justify-center items-center w-97 bg-orange-100 rounded-xl" > tambah baru
+            <button type="button" onClick={addtoping} className="text-2xl font-semibold text-orange-800 flex justify-center items-center w-78 bg-orange-100 rounded-xl" > tambah baru
                 <Plus className="mt-0.5" size={35} />  </button>
         </div>
     )

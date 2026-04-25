@@ -11,7 +11,7 @@ import { ClipLoader } from "react-spinners"
 export default function Crudform({ formact }) {
     const [state, actionform, pending] = useActionState(formact, null)
     return (
-        <form encType="multipart/form-data" className="w-full px-2" action={actionform}>
+        <form encType="multipart/form-data" className="w-full px-4" action={actionform}>
             <Foodinputimage />
             <Textmakanan type={"text"} name={"namamakanan"} id={"namamakanan"} labeltext={"nama makanan"} placeholder={"tulis nama makanan disini"} />
             <Textmakanan type={"numeric"} name={"hargamakanan"} id={"hargamakanan"} labeltext={"harga makanan"} placeholder={"Rp 0.00"} />
