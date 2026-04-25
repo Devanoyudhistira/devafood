@@ -1,3 +1,4 @@
+import Footeradmin from "../components/admin/footer";
 import { createClient } from "../supabase/server";
 import supabase from "../supabase/supabase";
 import { redirect } from "next/navigation";
@@ -18,12 +19,13 @@ export default async function Layoutadmin({ children }) {
         redirect("/")
     }
     return (
-        <div className="w-max h-max pb-10 " >
+        <div className="w-max h-max pb-40 " >
             <nav className="w-screen h-13 px-2 flex items-center border-b border-orange-950 gap-4" >
                 <People size={25} />
                 <h1 className="text-xl font-extrabold text-orange-600" > Panama </h1>
             </nav>
             {children}
+            <Footeradmin/>
         </div>
     )
 }
