@@ -5,12 +5,27 @@ import convertToMoney from "@/app/function/convert";
 import supabase from "@/app/supabase/supabase";
 import { useActionState } from "react";
 import Orderadd from "../flashmessage/orderadd";
+import { useRouter } from "next/navigation";
+
 
 
 export default function Foodcontain({ data, deleteorder, tableid }) {
     const [allquantity, setallquantity] = useState(data.map((e, i) => ({ id: e.id, quantity: e.quantity, harga: e.food.harga })))
     const [state, deleteaction, pending] = useActionState(deleteorder, null)
     const [topping, settopping] = useState()
+    const router = useRouter()
+
+    async function purchasetocashier(params) {
+        const { data, error } = await supabase.from("recipient").insert({
+            meja: tableid,
+            grossprice: allquantity.reduce((total, item, i) => { return (total + (item.harga * item.quantity)); }, 0),
+            status: "waiting"
+        }).select("id")
+        console.log(error)
+        if (data) {
+            router.push("/wait")
+        }
+    }
 
 
     async function purchase(e) {
@@ -113,7 +128,8 @@ export default function Foodcontain({ data, deleteorder, tableid }) {
             <h1 className="text-2xl font-semibold  capitalize" > total </h1>
             <h2 className="text-2xl text-orange-600 font-extrabold " > {convertToMoney(allquantity.reduce((total, item, i) => { return (total + (item.harga * item.quantity)); }, 0))} </h2>
         </div>
-        <button className="w-[90%] rounded-2xl h-15 text-xl font-extrabold bg-orange-600" onClick={(e) => purchase(e)} > Purchase </button>
+        <button className="text-xl font-bold w-[90%] h-15 rounded-2xl px-2 bg-emerald-500 " onClick={purchasetocashier} > Bayar ke kasir (qris,uang) </button>
+        <button className="w-[90%] rounded-2xl h-15 text-xl font-bold px-2 bg-orange-600" onClick={(e) => purchase(e)} > Gunakan pembayaran digital (atm,ewallet) </button>
 
     </div>)
 }

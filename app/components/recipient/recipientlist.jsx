@@ -13,10 +13,9 @@ export default function Recipientlist({ tableid, status, harga, id }) {
         const fetchData = async () => {
             const { data } = await supabase
                 .from("order")
-                .select("id,food(name,gambar,harga),quantity")
+                .select("id,food(name,gambar,harga),quantity,table(nomer_meja)")
                 .eq("table", tableid)
-
-            setData(data || [])
+            setData(data || [])            
         }
 
         fetchData()
@@ -26,7 +25,7 @@ export default function Recipientlist({ tableid, status, harga, id }) {
         <div className="flex flex-col gap-2 w-full px-4 bg-white py-3 rounded-xl">
             <div className="w-full flex justify-between items-center">
                 <h1 className="text-2xl font-semibold text-orange-600">
-                    Meja {tableid}
+                    Meja {data[0]?.table.nomer_meja}
                 </h1>
                 <h2 className="w-max h-max px-3 py-1 rounded-full bg-green-300 font-extrabold text-md">
                     {status}
