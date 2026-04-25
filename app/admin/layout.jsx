@@ -13,7 +13,7 @@ export default async function Layoutadmin({ children }) {
     const { data: admindata, error: adminerror } = await supabase
         .from("admin")
         .select("id")
-        .eq("uuid", user.user.id).single();
+        .eq("uuid", user?.user?.id).single();
     if (!admindata) {
         redirect("/")
     }
