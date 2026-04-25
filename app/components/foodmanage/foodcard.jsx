@@ -2,10 +2,11 @@
 
 import convertToMoney from "@/app/function/convert"
 import Image from "next/image"
+import { useActionState } from "react"
 import { Pen } from "react-bootstrap-icons"
 import { Trash2 } from "react-bootstrap-icons"
 
-export default function Foodcard({ image, nama,desc,harga }) {
+export default function Foodcard({ image, nama, desc, harga, deleteact, foodid }) {
     return (
         <div className="flex flex-col w-90  h-max py-4 px-3 bg-gray-50 rounded-xl items-center " >
             <Image width={300} height={300} className="mt-3 object-center object-cover rounded-xl w-[80%] h-50" src={`https://bmqqribeuxnppfcxittg.supabase.co/storage/v1/object/public/devafood/${image}`} alt="haloo" />
@@ -15,9 +16,10 @@ export default function Foodcard({ image, nama,desc,harga }) {
                     <div className="w-max h-max p-2 justify-center items-center flex rounded-full bg-orange-200" >
                         <Pen className="text-orange-800" size={20} />
                     </div>
-                    <div className="w-max h-max p-2 flex justify-center items-center rounded-full bg-orange-200" >
-                        <Trash2 className="text-orange-800" size={20} />
-                    </div>
+                    <form action={deleteact} className="w-max h-max p-2 flex justify-center items-center rounded-full bg-orange-200" >                        
+                        <input id="deletefood" name="deletefood" type="text" value={foodid} hidden />
+                        <button type="submit" > <Trash2 className="text-orange-800" size={20} /> </button>
+                    </form>
                 </div>
             </div>
             <p className="text-left px-8 text-orange-700 font-medium"> {desc} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti est, ipsum tenetur magni nisi sunt expedita veniam modi. Doloremque, quia voluptas! Suscipit quisquam iusto dolor ipsum hic natus quis accusantium! </p>
