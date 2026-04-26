@@ -2,6 +2,7 @@
 
 import convertToMoney from "@/app/function/convert"
 import Image from "next/image"
+import Link from "next/link"
 import { useActionState } from "react"
 import { Pen } from "react-bootstrap-icons"
 import { Trash2 } from "react-bootstrap-icons"
@@ -13,9 +14,9 @@ export default function Foodcard({ image, nama, desc, harga, deleteact, foodid }
             <div className="w-full px-8 mt-2 flex justify-between items-center" >
                 <h1 className="text-3xl font-bold text-orange-800" > {nama} </h1>
                 <div className="w-max flex items-center justify-between  gap-3" >
-                    <div className="w-max h-max p-2 justify-center items-center flex rounded-full bg-orange-200" >
+                    <Link href={`/admin/update/${foodid}`} className="w-max h-max p-2 justify-center items-center flex rounded-full bg-orange-200" >
                         <Pen className="text-orange-800" size={20} />
-                    </div>
+                    </Link>
                     <form action={deleteact} className="w-max h-max p-2 flex justify-center items-center rounded-full bg-orange-200" >                        
                         <input id="deletefood" name="deletefood" type="text" value={foodid} hidden />
                         <button type="submit" > <Trash2 className="text-orange-800" size={20} /> </button>

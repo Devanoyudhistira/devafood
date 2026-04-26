@@ -43,6 +43,8 @@ export async function createfood(prev, formdata) {
   redirect("/admin");
 }
 
+// delete method
+
 export async function deletefood(formdata) {
   console.log(foodid);
   const { data: deletedata, error: deleterror } = await supabase
@@ -56,8 +58,10 @@ export async function deletefood(formdata) {
   redirect("/admin");
 }
 
-export async function updatefood(formdata) {
-  const id = formdata.get("id");
+// update method
+
+export async function updatefood(id, prev, formdata) {
+  console.log(id);
   const image = formdata.get("foodimage");
   const extension = image.name.split(".").at(-1);
   const finalname =
@@ -71,39 +75,31 @@ export async function updatefood(formdata) {
   const category = formdata.get("category");
   const toppingname = formdata.getAll("namatopping");
   const toppingprice = formdata.getAll("hargatopping");
+  const idtopping = formdata.getAll("toppingid");  
 
   const previmage = (
-    await supabase
-      .from("food")
-      .select("gambar")
-      .eq("id", id)
-      .single()
+    await supabase.from("food").select("gambar").eq("id", id).single()
   ).data;
 
-  const { data, error } = await supabase
+  const { data:fooddata, error } = await supabase
     .from("food")
     .update({
-       name: foodname,
+      name: foodname,
       status: "active",
       jenis: category,
       harga: Number(foodprice),
       gambar: `${image instanceof File && image.size > 0 ? "food/" + finalname : previmage.gambar}`,
     })
     .eq("id", id)
-    .select();
+    .select("*").single();
 
-  if (error) {
-    console.log(error);
-    redirect(`/admin/inventory/update/${id}/failed`);
-  }
-  const res = await fetch(previmage.gambar);
+  console.log(toppingname)   
+  const res = await fetch(`https://bmqqribeuxnppfcxittg.supabase.co/storage/v1/object/public/devafood/${previmage.gambar}`);
   const blob = await res.blob();
 
   await supabase.storage
     .from("devafood")
-    .remove([
-      `productimage/${previmage.gambar.split("/").at(-1).trimEnd()}`,
-    ]);
+    .remove([`productimage/${previmage.gambar}`]);
   const imageup = await supabase.storage
     .from("devafood")
     .upload(
@@ -116,5 +112,5 @@ export async function updatefood(formdata) {
   }
 
   revalidatePath("/admin");
-  redirect(`/admin/food`);
+  redirect(`/admin`);
 }
