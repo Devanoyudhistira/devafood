@@ -17,8 +17,7 @@ export default function Foodcard({ image, nama, desc, harga, deleteact, foodid }
                     <Link href={`/admin/update/${foodid}`} className="w-max h-max p-2 justify-center items-center flex rounded-full bg-orange-200" >
                         <Pen className="text-orange-800" size={20} />
                     </Link>
-                    <form action={deleteact} className="w-max h-max p-2 flex justify-center items-center rounded-full bg-orange-200" >                        
-                        <input id="deletefood" name="deletefood" type="text" value={foodid} hidden />
+                    <form action={deleteact} className="w-max h-max p-2 flex justify-center items-center rounded-full bg-orange-200" >                                                
                         <button type="submit" > <Trash2 className="text-orange-800" size={20} /> </button>
                     </form>
                 </div>

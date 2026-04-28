@@ -23,7 +23,7 @@ export default async function RootLayout({ children }) {
   const { data } = await supabaseserver.auth.getUser()
   const { data: session } = await supabaseserver.auth.getSession()
   if (!session.session) {
-    redirect("/table")
+    redirect("/auth")
   }
   const { data: user } = await supabaseserver.auth.getUser()
   const { data: admindata, error: adminerror } = await supabase
