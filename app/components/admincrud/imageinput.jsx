@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Camera } from "react-bootstrap-icons"
 import { Images } from "react-bootstrap-icons"
 export default function Foodinputimage({originalvalue}) {
-    const [preview, setPreview] = useState(originalvalue || null)
+    const [preview, setPreview] = useState( originalvalue ? `https://bmqqribeuxnppfcxittg.supabase.co/storage/v1/object/public/devafood/${originalvalue}` : false)
     const [file, setFile] = useState(null)
 
     const handleFileChange = (e) => {

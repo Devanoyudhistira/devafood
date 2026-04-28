@@ -15,7 +15,7 @@ export default function Crudform({ formact,foodname,foodprice,foodcategory,foodi
     const [state, actionform, pending] = useActionState(formact, null)
     return (
         <form className="w-full px-4" action={actionform}>
-            <Foodinputimage originalvalue={`https://bmqqribeuxnppfcxittg.supabase.co/storage/v1/object/public/devafood/${foodimage}`} />
+            <Foodinputimage originalvalue={foodimage} />
             <Textmakanan initialvalue={foodvalue} changehandler={(e) => setfoodvalue(e.currentTarget.value) } type={"text"} name={"namamakanan"} id={"namamakanan"} labeltext={"nama makanan"} placeholder={"tulis nama makanan disini"} />
             <Textmakanan initialvalue={foodpricevalue} changehandler={(e) => setpricevalue(e.currentTarget.value) } type={"numeric"} name={"hargamakanan"} id={"hargamakanan"} labeltext={"harga makanan"} placeholder={"Rp 0.00"} />
             <h1 className="text-2xl font-semibold mt-4 text-orange-600" > Kategori </h1>

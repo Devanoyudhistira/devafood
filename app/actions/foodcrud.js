@@ -45,8 +45,7 @@ export async function createfood(prev, formdata) {
 
 // delete method
 
-export async function deletefood(formdata) {
-  console.log(foodid);
+export async function deletefood(foodid,formdata) {  
   const { data: deletedata, error: deleterror } = await supabase
     .from("food")
     .delete()
@@ -60,8 +59,7 @@ export async function deletefood(formdata) {
 
 // update method
 
-export async function updatefood(id, prev, formdata) {
-  console.log(id);
+export async function updatefood(id, prev, formdata) {  
   const image = formdata.get("foodimage");
   const extension = image.name.split(".").at(-1);
   const finalname =
