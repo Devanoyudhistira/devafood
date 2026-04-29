@@ -34,7 +34,9 @@ export default async function RootLayout({ children }) {
     redirect("/admin")
   }
   const userid = data?.user.id
+  console.log(userid)
   const { data: tabledata } = await supabase.from("meja").select("nomer_meja").eq("uuid", userid).single()
+  console.log(tabledata)
   return (
     <main className="flex flex-col items-center w-full h-auto pb-18">
       <Navbar logoutbutton={Logout} text={tabledata.nomer_meja} />

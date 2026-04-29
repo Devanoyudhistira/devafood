@@ -61,3 +61,31 @@ export async function Logout(prev, formdata) {
 
   redirect("/table");
 }
+
+export async function loginotp(formdata) {
+  const supabaseserver = await createClient();
+  const otp = formdata.getAll("otp").map(e => e ).reduce((e,i) => e + i)
+  console.log(otp)
+  const { data: tablestatus, error } = await supabase
+    .from("meja")
+    .update({
+      status: "kosong",
+    })
+    .eq("kode_meja", otp)
+    .select("*").single();
+    console.log(tablestatus)
+    console.log(error)
+
+    const { data, error:autherror } = await supabaseserver.auth.signInWithPassword({
+    email: tablestatus.email_meja ,
+    password: "password",
+  });
+
+  console.log(data)
+  console.log(autherror)
+  if(autherror){
+    console.log(autherror)
+  }
+  redirect("/")
+
+}

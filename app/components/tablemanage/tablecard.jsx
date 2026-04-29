@@ -4,6 +4,7 @@ import { LockFill } from "react-bootstrap-icons";
 import { Lock } from "react-bootstrap-icons";
 import { People } from "react-bootstrap-icons";
 import { AnimatePresence, motion } from "motion/react"
+import Link from "next/link";
 
 export default function Tablecard({ nomer, status, kursi, updateact }) {
     const [state, updateaction, pending] = useActionState(updateact, null)
@@ -35,9 +36,9 @@ export default function Tablecard({ nomer, status, kursi, updateact }) {
                 <h1 className={`${status === "kosong" ? "bg-green-400" : "bg-orange-400"} py-1 px-2 text-xs font-medium rounded-full`} > {status} </h1>
             </div>
             <h2 className="text-md gap-3 mt-4 font-semibold text-orange-800 flex items-center" ><People />  {kursi} kursi </h2>
-            <form action={updateaction} className="h-17 flex  items-center justify-center w-full border-t border-orange-500 mt-10 justify-self-end self-end px-6" >
+            <Link prefetch={true} href={"/auth"} className="h-17 flex  items-center justify-center w-full border-t border-orange-500 mt-10 justify-self-end self-end px-6" >
                 <button className={`text-2xl text-center ${status == "kosong" ? "bg-green-400" : "bg-orange-500"} w-full h-max py-2 font-semibold capitalize rounded-md `} > {status === "kosong" ? "tandai telah dipakai" : "kosongkan"} </button>
-            </form>
+            </Link>
         </div>
     )
 }

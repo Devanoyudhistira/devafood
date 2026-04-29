@@ -15,7 +15,7 @@ export default async function Page() {
         <main className="px-1 pb-10 flex flex-col items-center" >
             <nav className="w-screen h-12 flex items-center text-md text-orange-800 font-semibold" >
             </nav>
-            <div className="w-full px-4" >
+            {/* <div className="w-full px-4" >
                 <h1 className="text-orange-900 text-4xl font-bold capitalize " > selamat datang </h1>
                 <p className="text-orange-700 text-xl font-semibold w-90 " > silahkan dipilih mau makan disini apa dibawa pulang</p>
                 <div className="flex flex-col px-4 gap-2 mt-4" >
@@ -34,7 +34,7 @@ export default async function Page() {
                         </div>
                     </motion.label>
                 </div>
-            </div>
+            </div> */}
             <div className="flex flex-col px-4 w-full mt-6 " >
                 <h2 className="text-xl font-semibold text-orange-900"  > Pilih meja anda </h2>
                 <h3 className="text-md font-medium text-orange-800" > Tekan meja untuk memilih tempat ;) </h3>
