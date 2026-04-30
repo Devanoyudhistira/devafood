@@ -8,7 +8,7 @@ import * as motion from "motion/react-client"
 import { useEffect, useState } from "react";
 import supabase from "@/app/supabase/supabase";
 
-export default function Foodpreview({ index, nama, gambar, harga, id, quantity, deletefunc, increasequantity, decreasequantity, toppings }) {
+export default function Foodpreview({ index, nama, gambar, harga, id, quantity, deletefunc, increasequantity, decreasequantity, toppings,topping_price }) {
     const [topping, settopping] = useState([])
 
     useEffect(() => {
@@ -22,7 +22,7 @@ export default function Foodpreview({ index, nama, gambar, harga, id, quantity, 
 
 
     return (
-        <div className="w-full h-30 px-1 gap-1  rounded-xl flex justify-between items-center" >
+        <div className="w-full h-max px-1 gap-1  rounded-xl flex justify-between items-center" >
             <Image width={300} height={300} alt={nama} src={`https://bmqqribeuxnppfcxittg.supabase.co/storage/v1/object/public/devafood/${gambar}`} className="w-35 gap-2 h-30 rounded-2xl object-center object-cover" />
             <div className="flex flex-col w-50" >
                 <div className="flex w-full justify-between px-2 items-center" >
@@ -37,12 +37,12 @@ export default function Foodpreview({ index, nama, gambar, harga, id, quantity, 
                     {topping.length > 0 && topping.map(e => 
                     <div key={e.id} className="flex gap-1 bg-orange-300 rounded-full px-2 py-1 w-max" >
                         <h1> {e.nama} </h1>
-                        <h2 className="font-light text-orange-600" > {e.harga} </h2>
+                        <h2 className="font-semibold text-orange-600" >  + {convertToMoney(e.harga)} </h2>
                     </div>
                     )}
                 </div>
                 <div className="flex justify-center items-center gap-2" >
-                    <h1 className="text-orange-600 font-extrabold" > {convertToMoney(harga * quantity)} </h1>
+                    <h1 className="text-orange-600 font-extrabold" > {convertToMoney(topping_price +  harga * quantity)} </h1>
                     <div className="flex gap-4 bg-white overflow-hidden rounded-xl items-center justify-center" >
                         <motion.button whileTap={{ scale: 0.9 }} onClick={() => increasequantity(id, index)} className="p-2 z-1000 text-2xl cursor-pointer  " > <Plus /></motion.button>
                         <h1> {quantity} </h1>

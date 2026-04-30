@@ -10,7 +10,8 @@ import { useRouter } from "next/navigation";
 
 
 export default function Foodcontain({ data, deleteorder, tableid }) {
-    const [allquantity, setallquantity] = useState(data.map((e, i) => ({ id: e.id, quantity: e.quantity, harga: e.food.harga })))
+    const [allquantity, setallquantity] = useState(data.map((e, i) => ({ id: e.id, quantity: e.quantity, harga: e.food.harga,hargatopping:e.toppings_price })))
+    console.log(allquantity)
     const [state, deleteaction, pending] = useActionState(deleteorder, null)
     const [topping, settopping] = useState()
     const router = useRouter()
@@ -18,13 +19,20 @@ export default function Foodcontain({ data, deleteorder, tableid }) {
     async function purchasetocashier(params) {
         const { data, error } = await supabase.from("recipient").insert({
             meja: tableid,
-            grossprice: allquantity.reduce((total, item, i) => { return (total + (item.harga * item.quantity)); }, 0),
+            grossprice: allquantity.reduce((total, item, i) => { return (total + item.hargatopping + (item.harga * item.quantity)); }, 0),
             status: "waiting"
         }).select("id")
         console.log(error)
         if (data) {
             router.push("/wait")
         }
+    }
+
+    async function removetopping(id,price) {
+        const { error } = await supabase.rpc("addpricetopping", {
+            order_id: id,
+            price:price
+        })
     }
 
 
@@ -38,7 +46,7 @@ export default function Foodcontain({ data, deleteorder, tableid }) {
             },
             body: JSON.stringify({
                 produk: allquantity[0].id,
-                harga: allquantity.reduce((total, item, i) => { return (total + (item.harga * item.quantity)); }, 0),
+                harga: allquantity.reduce((total, item, i) => { return (total + item.hargatopping + (item.harga * item.quantity)); }, 0),
                 quantity: 1,
                 id: 2,
                 namapembeli: tableid
@@ -110,9 +118,7 @@ export default function Foodcontain({ data, deleteorder, tableid }) {
     useEffect(() => {
         if (state?.code === 200) {
             // eslint-disable-next-line react-hooks/set-state-in-effect
-            setallquantity(prev => prev.filter(item => item.id !== state?.id)
-            )
-        }
+            setallquantity(prev => prev.filter(item => item.id !== state?.id))}
     }, [state])
 
 
@@ -120,13 +126,13 @@ export default function Foodcontain({ data, deleteorder, tableid }) {
         <Orderadd error={state?.code !== 200} message={state?.message} pending={pending} show={state?.code === 200} />
         <div className="w-full h-98 overflow-x-hidden overflow-y-auto  px-1 mt-7 py-3 flex flex-col gap-y-12"  >
             {data.map((e, i) =>
-                <Foodpreview toppings={e.toppings} index={i} increasequantity={increasequantity} decreasequantity={decreasequantity} deletefunc={deleteaction} key={e.id} id={e.id} gambar={e.food.gambar} nama={e.food.name} quantity={allquantity[i].quantity} harga={e.food.harga} />
+                <Foodpreview topping_price={e.toppings_price} toppings={e.toppings} index={i} increasequantity={increasequantity} decreasequantity={decreasequantity} deletefunc={deleteaction} key={e.id} id={e.id} gambar={e.food.gambar} nama={e.food.name} quantity={allquantity[i].quantity} harga={e.food.harga} />
             )}
         </div>
 
         <div className={`w-[85%] flex justify-between items-center px-3 h-24 bg-orange-200 rounded-2xl mt-8`} >
             <h1 className="text-2xl font-semibold  capitalize" > total </h1>
-            <h2 className="text-2xl text-orange-600 font-extrabold " > {convertToMoney(allquantity.reduce((total, item, i) => { return (total + (item.harga * item.quantity)); }, 0))} </h2>
+            <h2 className="text-2xl text-orange-600 font-extrabold " > {convertToMoney(allquantity.reduce((total, item, i) => { return (total + item.hargatopping + (item.harga * item.quantity)); }, 0))} </h2>
         </div>
         <button className="text-xl font-bold w-[90%] h-15 rounded-2xl px-2 bg-emerald-500 " onClick={purchasetocashier} > Bayar ke kasir (qris,uang) </button>
         <button className="w-[90%] rounded-2xl h-15 text-xl font-bold px-2 bg-orange-600" onClick={(e) => purchase(e)} > Gunakan pembayaran digital (atm,ewallet) </button>
