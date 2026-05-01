@@ -4,10 +4,15 @@ import supabase from "../supabase/supabase"
 import moment from "moment/moment"
 import convertToMoney from "../function/convert"
 import Foodlist from "../components/history/foodlist"
+import { createClient } from "../supabase/server"
 
 
 export default async function Page() {
-    const { data: recipient } = await supabase.from("recipient").select("*").order("created_at", { ascending: true })            
+    const supabaseserver = await createClient()
+    const {data:user} = await supabaseserver.auth.getUser()    
+    const {data:table} = await supabase.from("meja").select("*").eq("uuid",user.user.id).single()
+    console.log(table)
+    const { data: recipient } = await supabase.from("recipient").select("*").eq("meja",table.id).order("created_at", { ascending: true })            
     return (
         <main className="w-screen flex flex-col items-center gap-5 pt-10 pb-24" >
             {recipient.map(e =>
