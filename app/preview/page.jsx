@@ -11,7 +11,7 @@ export default async function Page() {
     const supabaseserver = await createClient()
     const {data:user} =await  supabaseserver.auth.getUser()    
     const {data:table} = await supabase.from("meja").select("*").eq("uuid",user.user.id).single()    
-    const { data } = await supabase.from("order").select("id,food(name,gambar,harga),quantity,toppings,toppings_price").eq("table", table.id).order("id", { ascending: true })        
+    const { data } = await supabase.from("order").select("id,food(id,name,gambar,harga),quantity,toppings,toppings_price").eq("table", table.id).order("id", { ascending: true })        
     return (
         <div className="w-full px-2 pb-40" >
             <nav className="w-screen flex items-center justify-start gap-3 h-14" >                

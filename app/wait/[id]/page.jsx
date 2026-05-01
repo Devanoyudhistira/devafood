@@ -1,16 +1,17 @@
 import { ForkKnife } from "react-bootstrap-icons";
-import supabase from "../supabase/supabase";
-import { createClient } from "../supabase/server";
+import supabase from "../../supabase/supabase";
+import { createClient } from "../../supabase/server";
 import Image from "next/image";
-import Waitsplash from "../components/wait/waitsplash";
-import convertToMoney from "../function/convert";
+import Waitsplash from "../../components/wait/waitsplash";
+import convertToMoney from "../../function/convert";
 
-export default async function page() {
+export default async function page({params}) {
+    const {id} = await params
     const supabaseserver = await createClient()
-    const { data: user } = await supabaseserver.auth.getUser()
+    const { data: user } = await supabaseserver.auth.getUser()    
     const { data: table } = await supabase.from("meja").select("*").eq("uuid", user.user.id).single()
-    const { data } = await supabase.from("order").select("id,food(name,gambar,harga),quantity").eq("table", table.id).order("id", { ascending: true }).limit(1).single()
-    const { data: recipient } = await supabase.from("recipient").select("*").eq("meja",table.id).single()
+    const { data } = await supabase.from("order").select("id,food(name,gambar,harga),quantity").eq("table", table.id ).order("id", { ascending: true }).limit(1).single()
+    const { data: recipient } = await supabase.from("recipient").select("*").eq("id",id).single()
     console.log(recipient)
     return (<div className="flex flex-col items-center" >
         <Waitsplash initialdata={recipient} />
