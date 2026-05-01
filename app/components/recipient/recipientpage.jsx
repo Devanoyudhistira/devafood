@@ -64,6 +64,7 @@ export default function Recipientpage({ initialData }) {
                         harga={e.grossprice}
                         status={e.status}
                         tableid={e.meja}
+                        toppings={e.pesanan}
                     />
                 ))}
             </div>

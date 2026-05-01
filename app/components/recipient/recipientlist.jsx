@@ -7,16 +7,16 @@ import supabase from "@/app/supabase/supabase"
 import Image from "next/image"
 import Recipientname from "./recipientname"
 
-export default function Recipientlist({ tableid, status, harga, id }) {
+export default function Recipientlist({ tableid, status, harga, id,toppings }) {
     const [data, setData] = useState([])    
+    console.log(toppings)
 
     useEffect(() => {
         const fetchData = async () => {
             const { data } = await supabase
                 .from("order")
                 .select("id,food(name,gambar,harga),quantity,toppings,table(nomer_meja)")
-                .eq("table", tableid)    
-                console.log(data)        
+                .eq("table", tableid)                           
             setData(data || [])
         }
         fetchData()
@@ -34,8 +34,8 @@ export default function Recipientlist({ tableid, status, harga, id }) {
                 </h2>
             </div>
 
-            {data.map(e => (
-                <Recipientname key={e.id} name={e.food.name} quantity={e.quantity} gambar={e.food.gambar} toppings={e.toppings} />
+            {toppings.map(e => (
+                <Recipientname key={e.nama} name={e.nama} quantity={e.quantity} toppings={e.topping} />
             ))}
 
             <div className="border-t-2 flex flex-col gap-3 border-orange-950 mt-4 pt-4">

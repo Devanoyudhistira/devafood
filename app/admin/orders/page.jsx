@@ -3,6 +3,7 @@ import supabase from "@/app/supabase/supabase";
 
 export default async function Page(){
     const {data:recipient} = await supabase.from("recipient").select("*").eq("status","waiting")
+    console.log(recipient)
     return(
     <>
     <Recipientpage initialData={recipient} />
