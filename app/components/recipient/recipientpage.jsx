@@ -6,6 +6,7 @@ import Recipientlist from "@/app/components/recipient/recipientlist"
 
 export default function Recipientpage({ initialData }) {
     const [recipient, setRecipient] = useState(initialData)
+    console.log(initialData)
 
     useEffect(() => {
         const channel = supabase
@@ -56,7 +57,7 @@ export default function Recipientpage({ initialData }) {
                 </h1>
             </div>
 
-            <div className="flex flex-col w-full px-5">
+            <div className="flex flex-col gap-8 w-full px-5">
                 {recipient?.map(e => (
                     <Recipientlist
                         key={e.id}
@@ -64,7 +65,7 @@ export default function Recipientpage({ initialData }) {
                         harga={e.grossprice}
                         status={e.status}
                         tableid={e.meja}
-                        toppings={e.pesanan}
+                        pesanan={e.pesanan}
                     />
                 ))}
             </div>
