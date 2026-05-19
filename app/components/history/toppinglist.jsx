@@ -17,7 +17,7 @@ export default function Toppinglist({data}) {
 
     return <div className="flex gap-2 w-full flex-wrap items-center  overflow-hidden" >
         {toppingname?.map(e =>             
-            <h4 className="text-xs font-semibold bg-orange-200 rounded-full px-2 py-1" key={e} > {e.nama} </h4>
+            <h4 className="text-xs font-semibold bg-orange-200 rounded-full px-2 py-1" key={e.nama} > {e.nama} </h4>
         )}
     </div>
 }

@@ -20,7 +20,7 @@ export default function Footeradmin() {
                 <ForkKnife />
                 <h1> menu </h1>
             </Link>
-            <Link href={"admin/table"} className={`flex ${pathname === "table/" && `bg-orange-300 p-1.5`} rounded-xl w-max h-max flex-col items-center justify-center text-xl `} >
+            <Link href={"/admin/table"} className={`flex ${pathname === "table/" && `bg-orange-300 p-1.5`} rounded-xl w-max h-max flex-col items-center justify-center text-xl `} >
                 <Table />
                 <h1> meja </h1>
             </Link>

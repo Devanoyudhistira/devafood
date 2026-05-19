@@ -36,9 +36,11 @@ export default function Tablecard({ nomer, status, kursi, updateact }) {
                 <h1 className={`${status === "kosong" ? "bg-green-400" : "bg-orange-400"} py-1 px-2 text-xs font-medium rounded-full`} > {status} </h1>
             </div>
             <h2 className="text-md gap-3 mt-4 font-semibold text-orange-800 flex items-center" ><People />  {kursi} kursi </h2>
-            <Link prefetch={true} href={"/auth"} className="h-17 flex  items-center justify-center w-full border-t border-orange-500 mt-10 justify-self-end self-end px-6" >
-                <button className={`text-2xl text-center ${status == "kosong" ? "bg-green-400" : "bg-orange-500"} w-full h-max py-2 font-semibold capitalize rounded-md `} > {status === "kosong" ? "tandai telah dipakai" : "kosongkan"} </button>
-            </Link>
+            <h2 className="h-17 flex  items-center justify-center w-full border-t border-orange-500 mt-10 justify-self-end self-end px-6" >
+                <form className="w-full h-max flex items-center justify-center px-6" action={updateaction}>
+                <button type="submit" className={`text-2xl text-center ${status == "kosong" ? "bg-green-400" : "bg-orange-500"} w-full py-2 font-semibold capitalize rounded-md `} > {status === "kosong" ? "tandai telah dipakai" : "kosongkan meja ini ?"} </button>
+                </form>
+            </h2>
         </div>
     )
 }
