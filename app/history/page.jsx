@@ -13,6 +13,7 @@ export default async function Page() {
     const {data:table} = await supabase.from("meja").select("*").eq("uuid",user.user.id).single()
     console.log(table)
     const { data: recipient } = await supabase.from("recipient").select("*").eq("meja",table.id).order("created_at", { ascending: true })            
+    console.log(recipient)
     return (
         <main className="w-screen flex flex-col items-center gap-5 pt-10 pb-24" >
             {recipient.map(e =>
@@ -23,7 +24,7 @@ export default async function Page() {
                     </div>
                     <div>
                         <h6 className="text-xs font-medium" > {moment(e.created_at).locale("id").format("MMM,D YYYY")} </h6>
-                        <Foodlist datalist={e.pesanan} id={e.id} />
+                        <Foodlist datalist={e?.pesanan} id={e.id} />
                     </div>
                 </Link>
             )}

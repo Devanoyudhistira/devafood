@@ -26,11 +26,12 @@ export default function Foodcontain({ data, deleteorder, tableid }) {
         const { data, error } = await supabase.from("recipient").insert({
             meja: tableid,
             grossprice: allquantity.reduce((total, item, i) => { return (total + item.hargatopping + (item.harga * item.quantity)); }, 0),
-            status: "waiting"
-        }).select("id")
+            status: "waiting",
+            pesanan:allquantity.map(e => ({nama:e.foodname,topping:e.toppingid}))
+        }).select("id").single()
         console.log(error)
         if (data) {
-            router.push("/wait")
+            router.push(`/wait/${data.id}`)
         }
     }
 
