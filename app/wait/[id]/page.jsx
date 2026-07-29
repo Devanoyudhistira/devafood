@@ -16,7 +16,7 @@ export default async function page({params}) {
     return (<div className="flex flex-col items-center" >
         <Waitsplash initialdata={recipient} />
         <div className="w-[80%] py-3 mt-8 px-2 flex flex-col gap-2 bg-white rounded-xl" >
-            <h1 className="text-3xl font-semibold" > Pesanan anda </h1>
+            <h1 className="text-3xl font-semibold" > your order </h1>
             <div className="w-full flex items-center gap-4" >
                 <Image width={100} height={100} alt={data.food.name} src={`https://bmqqribeuxnppfcxittg.supabase.co/storage/v1/object/public/devafood/${data.food.gambar}`} className="w-15 h-15 rounded-xl object-center object-cover" />
                 <h1 className="text-md font-medium" > {data.quantity} X {data.food.name} </h1>
@@ -33,7 +33,7 @@ export default async function page({params}) {
                     </div>
                 </div>
                 <div className="flex self-start flex-col gap-2" >
-                    <h2 className="text-xl font-semibold text-orange-600" > Total biaya </h2>
+                    <h2 className="text-xl font-semibold text-orange-600" > Total price </h2>
                     <h3 className="text-2xl tracking-wider font-bold text-orange-950" > {convertToMoney(recipient.grossprice)} </h3>
                 </div>
             </div>

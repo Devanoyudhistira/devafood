@@ -23,7 +23,7 @@ export default async function RootLayout({ children }) {
   const { data } = await supabaseserver.auth.getUser()
   const { data: session } = await supabaseserver.auth.getSession()
   if (!session.session) {
-    redirect("/auth")
+    redirect("/table")
   }
   const { data: user } = await supabaseserver.auth.getUser()
   const { data: admindata, error: adminerror } = await supabase
@@ -41,8 +41,8 @@ export default async function RootLayout({ children }) {
     <main className="flex flex-col items-center w-full h-auto pb-18">
       <Navbar logoutbutton={Logout} text={tabledata.nomer_meja} />
       <div className="w-full mt-4 px-4 py-1 " >
-        <h5 className="text-md font-semibold text-orange-900" > Selamat datang di devano_Food </h5>
-        <h1 className="text-3xl w-70 font-extrabold text-orange-700" > Mau makan apa hari ini  </h1>
+        <h5 className="text-md font-semibold text-orange-900" > welcome to devanoFood </h5>
+        <h1 className="text-3xl w-70 font-extrabold text-orange-700" > what do you want to eat today  </h1>
         <form className="w-full mt-8" >
           <label htmlFor="searchfood" className="flex ml-2 overflow-hidden items-center w-full justify-center shadow-xs shadow-gray-900/50">
             <div className="bg-white rounded-tl-md rounded-bl-md w-10 h-14 flex items-center justify-center" >

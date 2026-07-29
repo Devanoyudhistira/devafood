@@ -1,5 +1,6 @@
 const nextConfig = {
   reactCompiler: true,
+  
 
   images: {
     remotePatterns: [

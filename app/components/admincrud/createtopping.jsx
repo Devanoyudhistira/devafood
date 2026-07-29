@@ -33,7 +33,7 @@ export default function Createtopping({initialtopping}) {
     }
     return (
         <div className="w-full h-max flex flex-col gap-2 px-2 py-2 -ml-3 box-content bg-gray-50" >
-            <h1 className="text-3xl font-bold text-orange-600" >tambahkan topping</h1>
+            <h1 className="text-3xl font-bold text-orange-600" >add topping</h1>
             {topping.map((e, i) =>
                 <div key={i}  className="flex items-center gap-2 mt-3" >
                     {e.id && <input type="text" name="toppingid" id="toppingid" hidden value={e.id} />}

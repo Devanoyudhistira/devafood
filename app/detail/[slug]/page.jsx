@@ -36,7 +36,7 @@ export default async function Page({ params }) {
                 </aside>
                 <Formaction action={addorder} >
                     <div className="w-full h-max px-2 rounded-3xl flex flex-col gap-3" >
-                        <h1 className="text-2xl font-extrabold text-orange-500" > Pilih topping </h1>
+                        <h1 className="text-2xl font-extrabold text-orange-500" > choose topping </h1>
                         {topping.map(e =>
                             <label htmlFor={e.id} key={e.id} className="text-orange-800 has-checked:bg-orange-200 has-checked:border-2 border-orange-900 has-checked:text-orange-900 transition bg-white rounded-md w-full py-1.5 px-4 flex justify-between items-center ">
                                 <input type="checkbox" hidden name="topping" className="peer" value={e.id} id={e.id} />

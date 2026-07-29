@@ -11,6 +11,6 @@ export default function Otpform({otpaction}) {
                 <Otpinput />
                 <Otpinput />
             </div>
-            <button className="w-full h-max bg-orange-400 text-4xl font-semibold py-2.5 rounded-2xl mt-4 text-gray-900" type="submit">kumpulkan</button>
+            <button className="w-full h-max bg-orange-400 text-4xl font-semibold py-2.5 rounded-2xl mt-4 text-gray-900" type="submit">Enter</button>
         </form>)
 }

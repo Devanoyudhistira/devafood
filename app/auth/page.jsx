@@ -18,8 +18,8 @@ export default async function Page() {
                 <Image src={"/loginimage.jpg"} alt="haloo" width={700} height={700} className="object-cover object-center w-full h-67 rounded-2xl  " />
             </div>
             <div className="w-full px-7 flex flex-col gap-0.5 items-center text-center mt-4" >
-                <h1 className="text-2xl font-bold text-orange-900" > Silahkan masukan kode anda </h1>
-                <h5 className="text-md font-medium text-orange-400" > tanya ke chef kasir tidak menemukan kodenya </h5>
+                <h1 className="text-2xl font-bold text-orange-900" > please enter your table code </h1>
+                <h5 className="text-md font-medium text-orange-400" > ask the cashier for code </h5>
             </div>
            <Otpform otpaction={loginotp} />
         </div>
