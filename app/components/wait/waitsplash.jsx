@@ -4,8 +4,7 @@ import { ForkKnife } from "react-bootstrap-icons"
 import supabase from "@/app/supabase/supabase"
 import { Check } from "react-bootstrap-icons"
 
-export default function Waitsplash({ initialdata }) {
-    console.log(initialdata)
+export default function Waitsplash({ initialdata }) {    
     const [orderdata, setorderdata] = useState(initialdata)
     console.log(orderdata.status)
     useEffect(() => {
@@ -41,9 +40,9 @@ export default function Waitsplash({ initialdata }) {
             <div className={`w-55 h-55 border-4 border-white shadow-2xl shadow-orange-800/50 mt-30 ${orderdata.status === "done" ? "bg-green-400": "bg-orange-700"  } rounded-full flex items-center justify-center`} >
                {orderdata.status === "done" ? <Check size={125} />  : <ForkKnife size={90} />}
             </div>
-           {orderdata.status !== "done" && <h1 className="text-3xl text-center font-semibold text-orange-800" > Chef sedang memasak makanan anda </h1>}
+           {orderdata.status !== "done" && <h1 className="text-3xl text-center font-semibold text-orange-800" > The chef is still cooking </h1>}
            {orderdata.status === "done" &&
-            <h1 className="text-3xl text-center font-semibold text-orange-800" > Makanan anda sudah selesai </h1>}
+            <h1 className="text-3xl text-center font-semibold text-orange-800" > Your dish is finish you can take it </h1>}
         </div>
     )
 }

@@ -23,11 +23,11 @@ export default function Orderadd({ show, pending,message,error }) {
 
     return (
         <AnimatePresence >
-            {showmessage && <motion.div exit={{ opacity: 0, scale: 0 }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} className={`fixed top-14 left-[6vw] text-md ${error ? "bg-red-100 border-red-300" : "bg-green-100 border-green-300"} bg-green-100 z-99999 border-green-300 border-2 gap-3  w-85 h-14 flex items-center justify-center rounded-2xl`} >                
+            {showmessage && <motion.div exit={{ opacity: 0, scale: 0 }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} className={`fixed top-14 left-[6vw] lg:left-[36vw] text-md ${error ? "bg-red-100 border-red-300" : "bg-green-100 border-green-300"} bg-green-100 z-99999 border-green-300 border-2 gap-3 lg:w-110 w-85 h-14 lg:h-18 flex items-center justify-center rounded-2xl`} >
                     {error ? <XCircleFill color="red" size={25} />  : <CheckCircleFill size={20} color="green" />}
                     <h1 className={`${error ? "text-red-600" : "text-green-400"} font-bold`} > {message} </h1>                         
             </motion.div>}
-            {pending && !showmessage && <motion.div exit={{ opacity: 0, scale: 0 }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} className="fixed top-14 left-[6vw] text-md bg-green-100 border-2 gap-3 border-green-300 w-85 h-14 flex items-center justify-center rounded-2xl" >                
+            {pending && !showmessage && <motion.div exit={{ opacity: 0, scale: 0 }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} className="fixed top-14 left-[6vw] lg:left-[36vw] text-md bg-green-100 border-2 gap-3 border-green-300 w-85 lg:w-110 lg:h-18 h-14 flex items-center justify-center rounded-2xl" >                
                     <ClipLoader size={25} />
                     <h1 className="text-xl font-extrabold" > loading </h1>                         
             </motion.div>}

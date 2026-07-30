@@ -10,13 +10,16 @@ import { useRouter } from "next/navigation";
 
 
 export default function Foodcontain({ data, deleteorder, tableid }) {
-    const [allquantity, setallquantity] = useState(data.map((e, i) => ({ id: e.id,
-         quantity: e.quantity, 
-         harga: e.food.harga,
-         hargatopping:e.toppings_price,
-         toppingid:e.toppings,
-         foodname:e.food.name,
-         foodid:e.food.id })))
+    const [allquantity, setallquantity] = useState(data.map((e, i) => ({
+        id: e.id,
+        quantity: e.quantity,
+        harga: e.food.harga,
+        hargatopping: e.toppings_price,
+        toppingid: e.toppings,
+        foodname: e.food.name,
+        foodid: e.food.id,
+        foodimage:e.food.gambar
+    })))
     console.log(data)
     const [state, deleteaction, pending] = useActionState(deleteorder, null)
     const [topping, settopping] = useState()
@@ -27,7 +30,7 @@ export default function Foodcontain({ data, deleteorder, tableid }) {
             meja: tableid,
             grossprice: allquantity.reduce((total, item, i) => { return (total + item.hargatopping + (item.harga * item.quantity)); }, 0),
             status: "waiting",
-            pesanan:allquantity.map(e => ({nama:e.foodname,topping:e.toppingid}))
+            pesanan: allquantity.map(e => ({ nama: e.foodname, topping: e.toppingid,image:e.foodimage,quantity:e.quantity }))
         }).select("id").single()
         console.log(error)
         if (data) {
@@ -35,10 +38,10 @@ export default function Foodcontain({ data, deleteorder, tableid }) {
         }
     }
 
-    async function addtopping(id,price) {
+    async function addtopping(id, price) {
         const { error } = await supabase.rpc("addpricetopping", {
             order_id: id,
-            price:price
+            price: price
         })
     }
 
@@ -57,7 +60,7 @@ export default function Foodcontain({ data, deleteorder, tableid }) {
                 quantity: 1,
                 id: 2,
                 namapembeli: tableid,
-                foodobject:allquantity.map(e => ({nama:e.foodname,topping:e.toppingid}))
+                foodobject: allquantity.map(e => ({ nama: e.foodname, topping: e.toppingid,image:e.foodimage,quantity:e.quantity }))
             }),
         })
         const token = await transaction.json();
@@ -126,7 +129,8 @@ export default function Foodcontain({ data, deleteorder, tableid }) {
     useEffect(() => {
         if (state?.code === 200) {
             // eslint-disable-next-line react-hooks/set-state-in-effect
-            setallquantity(prev => prev.filter(item => item.id !== state?.id))}
+            setallquantity(prev => prev.filter(item => item.id !== state?.id))
+        }
     }, [state])
 
 
@@ -142,7 +146,7 @@ export default function Foodcontain({ data, deleteorder, tableid }) {
             <h1 className="text-2xl font-semibold  capitalize" > total </h1>
             <h2 className="text-2xl text-orange-600 font-extrabold " > {convertToMoney(allquantity.reduce((total, item, i) => { return (total + item.hargatopping + (item.harga * item.quantity)); }, 0))} </h2>
         </div>
-        <button className="text-xl font-bold w-[90%] h-15 rounded-2xl px-2 bg-emerald-500 " onClick={purchasetocashier} > Bayar ke kasir (qris,uang) </button>
-        <button className="w-[90%] rounded-2xl h-15 text-xl font-bold px-2 bg-orange-600" onClick={(e) => purchase(e)} > Gunakan pembayaran digital (atm,ewallet) </button>
+        <button className="text-xl font-bold w-[90%] h-15 rounded-2xl px-2 bg-emerald-500 " onClick={purchasetocashier} > pay cash to cashier </button>
+        <button className="w-[90%] rounded-2xl h-15 text-xl font-bold px-2 bg-orange-600" onClick={(e) => purchase(e)} > Digital payment </button>
     </div>)
 }

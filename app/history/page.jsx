@@ -23,7 +23,7 @@ export default async function Page() {
                         <h2 className="text-xl font-bold text-orange-600" > {convertToMoney(e.grossprice)} </h2>
                     </div>
                     <div>
-                        <h6 className="text-xs font-medium" > {moment(e.created_at).locale("id").format("MMM,D YYYY")} </h6>
+                        <h6 className="text-lg text-orange-500 font-semibold" > {moment(e.created_at).locale("id").format("MMM,D YYYY")} </h6>
                         <Foodlist datalist={e?.pesanan} id={e.id} />
                     </div>
                 </Link>

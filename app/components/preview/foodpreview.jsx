@@ -25,14 +25,14 @@ export default function Foodpreview({ index, nama, gambar, harga, id, quantity, 
         <div className="w-full h-max px-1 gap-1  rounded-xl flex justify-between items-center" >
             <Image width={300} height={300} alt={nama} src={`https://bmqqribeuxnppfcxittg.supabase.co/storage/v1/object/public/devafood/${gambar}`} className="w-35 gap-2 h-30 rounded-2xl object-center object-cover" />
             <div className="flex flex-col w-50" >
-                <div className="flex w-full justify-between px-2 items-center" >
+                <div className="flex w-full justify-between px-0 items-center" >
                     <h1 className="text-xl font-semibold text-orange-950" > {nama} </h1>
                     <form action={deletefunc} className="">
                         <button className="text-stone-700 " > <Trash size={15} /> </button>
                         <input hidden type="text" name="id" id="id" value={id} />
                     </form>
                 </div>
-                <p className="text-xs font-light text-orange-800" > Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, quae </p>
+                {/* <p className="text-xs font-light text-orange-800" > Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, quae </p> */}
                 <div className="flex flex-col gap-1 text-xs font-semibold text-orange-800 mt-1" >
                     {topping.length > 0 && topping.map(e => 
                     <div key={e.id} className="flex gap-1 bg-orange-300 rounded-full px-2 py-1 w-max" >
