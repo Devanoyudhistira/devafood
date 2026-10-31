@@ -5,6 +5,7 @@ import { Lock } from "react-bootstrap-icons";
 import { People } from "react-bootstrap-icons";
 import { AnimatePresence, motion } from "motion/react"
 import Link from "next/link";
+import { ClipLoader } from "react-spinners";
 
 export default function Tablecard({ nomer, status, kursi, updateact }) {
     const [state, updateaction, pending] = useActionState(updateact, null)
@@ -23,7 +24,7 @@ export default function Tablecard({ nomer, status, kursi, updateact }) {
                             <div className="w-max h-max p-4 bg-orange-100 text-orange-800 rounded-2xl " >
                                 <LockFill size={45} />
                             </div>
-                            <h2 className="text-2xl font-semibold text-center text-orange-950" > tunjukan kode ini ke pelanggan  </h2>
+                            <h2 className="text-2xl font-semibold text-center text-orange-950" > Show this code to customer  </h2>
                             <div className="w-max p-6 rounded-xl bg-orange-200 text-orange-800 mt-15 " >
                                 <h1 className="font-bold text-5xl " > {state?.code} </h1>
                             </div>
@@ -32,14 +33,14 @@ export default function Tablecard({ nomer, status, kursi, updateact }) {
                 }
             </AnimatePresence>
             <div className="w-full h-max py-2 flex justify-between items-center" >
-                <h1 className="text-2xl font-bold text-orange-900" >meja {nomer} </h1>
+                <h1 className="text-2xl font-bold text-orange-900" >Table {nomer} </h1>
                 <h1 className={`${status === "kosong" ? "bg-green-400" : "bg-orange-400"} py-1 px-2 text-xs font-medium rounded-full`} > {status} </h1>
             </div>
-            <h2 className="text-md gap-3 mt-4 font-semibold text-orange-800 flex items-center" ><People />  {kursi} kursi </h2>
+            <h2 className="text-md gap-3 mt-4 font-semibold text-orange-800 flex items-center" ><People />  {kursi} chair </h2>
             <h2 className="h-17 flex  items-center justify-center w-full border-t border-orange-500 mt-10 justify-self-end self-end px-6" >
                 <form className="w-full h-max flex items-center justify-center px-6" action={updateaction}>
-                <button type="submit" className={`text-2xl text-center ${status == "kosong" ? "bg-green-400" : "bg-orange-500"} w-full py-2 font-semibold capitalize rounded-md `} > {status === "kosong" ? "tandai telah dipakai" : "kosongkan meja ini ?"} </button>
-                </form>
+                    <button type="submit" disabled={pending} className={`lg:text-2xl w-10 text-lg text-center ${status == "kosong" ? "bg-orange-400" : "bg-green-500"} w-full py-2 font-semibold capitalize rounded-md `} > {pending ? <span className="flex w-full justify-center items-center gap-1" >Loading <ClipLoader size={25} className="mt-2" />  </span> : status === "kosong" ? "Mask as occupied" : "Emptying this table "} </button>
+                </form >
             </h2>
         </div>
     )

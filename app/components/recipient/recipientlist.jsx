@@ -38,7 +38,7 @@ export default function Recipientlist({ tableid, status, harga, id, pesanan }) {
                         type="submit"
                         className="w-full bg-orange-600 rounded-full flex items-center justify-center text-white font-bold"
                     >
-                        Selesai
+                        Sign as finish
                     </button>
                 </form>
             </div>
